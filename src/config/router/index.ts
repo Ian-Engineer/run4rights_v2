@@ -2,11 +2,18 @@ import {
   createBrowserRouter,
 } from "react-router";
 import Template from "../../main/template";
+import Routes from './routes'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: Template,
+    Component: Routes.Root,
+    children: [
+        {
+            path: '/',
+            Component: Routes.Template
+        }
+    ]
   },
 ]);
 
