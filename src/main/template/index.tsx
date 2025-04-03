@@ -3,10 +3,6 @@ import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 
 function Template() {
-    return (
-        <div>Template</div>
-    )
-
   const [count, setCount] = useState(0)
 
   return (
