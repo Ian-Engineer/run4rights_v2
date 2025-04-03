@@ -3,13 +3,13 @@ import { createTheme, ThemeOptions } from '@mui/material/styles'
 const lightThemeOptions: ThemeOptions = {
     palette: {
         primary: {
-            main: '#FFF7DA',
+            main: '#FFEA9C',
         },
         secondary: {
             main: '#FFF7DA',
         },
         background: {
-            default: '#FFF7DA',
+            default: '#FFF7DA'
         }
     },
     typography: {

@@ -10,22 +10,22 @@ function Root() {
     const [loading, setLoading] = useState(true)
     
     useEffect(()=>{
-        setTimeout(()=>setLoading(false),3000)
+        setTimeout(()=>setLoading(false),1000)
     }, [])
 
     return (
-        <div className="max-h-screen h-screen max-w-screen w-screen flex flex-col flex-grow">
+        <div className="max-h-screen h-screen max-w-screen w-screen">
             { loading ? 
             <LandingPage />
             :
-                <>
+                <div className="h-full w-full flex flex-col-reverse bottom-0 sm:flex-col">
                     <NavBar />
                     <Grow in={!loading}>
                         <div className="flex-grow flex overflow-y-auto w-full justify-center z-10">
                             <Outlet />
                         </div>
                     </Grow>
-                </>
+                </div>
             }
         </div>
     )

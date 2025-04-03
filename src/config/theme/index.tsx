@@ -20,7 +20,7 @@ export const useThemeMode = () => {
 }
 
 export const ThemeModeProvider = ({ children }:{ children: React.ReactNode }) => {
-    const [ mode, setMode ] = useState<ColorMode>('dark');
+    const [ mode, setMode ] = useState<ColorMode>('light');
 
     const toggleColorMode = () => {
         setMode((prev) => (prev === 'light' ? 'light' : 'dark'))
