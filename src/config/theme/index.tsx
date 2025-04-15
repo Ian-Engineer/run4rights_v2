@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-import React, { createContext, useMemo, useState, useContext } from 'react';
+import React, { createContext, useMemo, useState, useContext, useEffect } from 'react';
 import { CssBaseline } from "@mui/material";
 import { lightTheme } from "./lightTheme";
 import { darkTheme } from "./darkTheme";
@@ -11,6 +11,8 @@ interface ThemeContextType {
     toggleColorMode: () => void;
 }
 
+const localStorageColorModeKey = 'prefered-color-mode'
+
 const ThemeModeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const useThemeMode = () => {
@@ -20,11 +22,27 @@ export const useThemeMode = () => {
 }
 
 export const ThemeModeProvider = ({ children }:{ children: React.ReactNode }) => {
-    const [ mode, setMode ] = useState<ColorMode>('light');
+    const getInitialMode = (): ColorMode => {
+        const saved = localStorage.getItem(localStorageColorModeKey) as ColorMode | null;
+        if (saved === 'light' || saved === 'dark') return saved;
+        
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return systemPrefersDark ? 'dark' : 'light';
+    };
+    
+    const [mode, setMode] = useState<ColorMode>(getInitialMode);
 
     const toggleColorMode = () => {
-        setMode((prev) => (prev === 'light' ? 'light' : 'dark'))
-    }
+        setMode((prev) => {
+        const next = prev === 'light' ? 'dark' : 'light';
+        localStorage.setItem(localStorageColorModeKey, next);
+        return next;
+        });
+    };
+
+    useEffect(() => {
+        localStorage.setItem(localStorageColorModeKey, mode);
+    }, [mode]);
 
     const theme = useMemo(()=> (mode === 'light' ? lightTheme : darkTheme), [mode])
 
