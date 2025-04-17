@@ -11,7 +11,11 @@ const router = createBrowserRouter([
     children: [
         {
             path: '/',
-            Component: Routes.Template
+            Component: Routes.Template,
+        },
+        {
+          path: '/contact',
+          Component: Routes.ContactPage,
         }
     ]
   },

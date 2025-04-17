@@ -1,6 +1,8 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles'
+import baseThemeOptions from './baseTheme';
 
 const lightThemeOptions: ThemeOptions = {
+    ...baseThemeOptions,
     palette: {
         primary: {
             main: '#FFEA9C',
@@ -9,21 +11,10 @@ const lightThemeOptions: ThemeOptions = {
             main: '#FFF7DA',
         },
         background: {
-            default: '#FFF7DA'
+            default: '#FFF7DA',
+            paper: 'rgba(255, 255, 255, 0.9)'
         }
     },
-    typography: {
-        fontFamily: ['Roboto', 'Helvetica'].join(',')
-    },
-    components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'capitalize'
-                }
-            }
-        }
-    }
 }
 
 export const lightTheme = createTheme(lightThemeOptions);

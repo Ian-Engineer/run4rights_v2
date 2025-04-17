@@ -1,29 +1,23 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles'
+import baseThemeOptions from './baseTheme'
 
 const darkThemeOptions: ThemeOptions = {
+    ...baseThemeOptions,
     palette: {
         primary: {
-            main: '#FFF7DA',
+            main: '#FFFFFF',
         },
         secondary: {
             main: '#FFF7DA',
         },
+        text: {
+            primary: '#FFFFFF'
+        },
         background: {
-            default: '#00000',
-        }
+            default: '#121212',
+            paper: 'rgba(30, 30, 30, 0.9)',
+        },
     },
-    typography: {
-        fontFamily: ['Roboto', 'Helvetica'].join(',')
-    },
-    components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'capitalize'
-                }
-            }
-        }
-    }
 }
 
 export const darkTheme = createTheme(darkThemeOptions)
