@@ -19,6 +19,13 @@ const baseThemeOptions: ThemeOptions = {
         },
       },
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0, // Reset just for AppBar
+        },
+      },
+    },
   },
 };
 
