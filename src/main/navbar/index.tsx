@@ -67,7 +67,7 @@ function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
                             {menuItems.map((item) => (
                                 <MenuItem
                                     key={item.name}
-                                    onClick={() => navigate(item.url)}
+                                    onClick={() => {handleHobbyMenuClose(); navigate(item.url)}}
                                 >
                                     {item.name}
                                 </MenuItem>

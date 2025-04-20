@@ -1,21 +1,46 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles'
 import baseThemeOptions from './baseTheme'
+import { grey } from '@mui/material/colors'
 
 const darkThemeOptions: ThemeOptions = {
     ...baseThemeOptions,
     palette: {
         primary: {
-            main: '#FFFFFF',
+            main: '#2D4A58',
         },
         secondary: {
-            main: '#FFF7DA',
+            main: '#FFFFFF',
+        },
+        textField: {
+            border: grey[400],
         },
         text: {
-            primary: '#FFFFFF'
+            primary: '#FFFFFF',
+            secondary: '#FFFFFF'
         },
         background: {
-            default: '#121212',
-            paper: 'rgba(30, 30, 30, 0.9)',
+            default: '#223843',
+            // default: "#3F4A5F",
+            paper: 'rgba(58, 92, 108, 0.88)',
+        },
+    },
+    components: {
+        ...baseThemeOptions.components,
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: ({ theme }) => ({
+                '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: theme.palette.textField.border,
+                },
+                }),
+            },
+        },
+        MuiSvgIcon: {
+            styleOverrides: {
+                root: {
+                color: grey[400],
+                },
+            },
         },
     },
 }

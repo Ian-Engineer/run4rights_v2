@@ -26,6 +26,17 @@ const baseThemeOptions: ThemeOptions = {
         },
       },
     },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+        //   backgroundImage: `url('/background.gif')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        },
+      },
+    },
   },
 };
 

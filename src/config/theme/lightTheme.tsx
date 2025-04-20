@@ -8,11 +8,11 @@ const lightThemeOptions: ThemeOptions = {
             main: '#FFEA9C',
         },
         secondary: {
-            main: '#FFF7DA',
+            main: '#000000',
         },
         background: {
             default: '#FFF7DA',
-            paper: 'rgba(255, 255, 255, 0.9)'
+            paper: 'rgba(255, 255, 255, 0.88)'
         }
     },
 }
