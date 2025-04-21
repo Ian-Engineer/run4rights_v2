@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField, Collapse, Typography } from "@mui/material";
 import { useEffect } from "react";
 
 function IanTextField(
@@ -12,6 +12,7 @@ function IanTextField(
         rows = 1,
         color = 'secondary',
         error = null,
+        size = 'small',
     }: {
         value: string,
         valueChange: Function,
@@ -21,22 +22,36 @@ function IanTextField(
         multiline?: boolean,
         rows?: number,
         color?: 'primary' | 'secondary' | 'error' | 'warning' | "info" | "success",
-        error?: string | null
+        error?: string | null,
+        size?: string
     }
 ) {
     return (
-        <TextField
-            className={className}
-            label={label}
-            required={required}
-            multiline={multiline}
-            rows={rows}
-            color={color}
-            value={value}
-            error={Boolean(error)}
-            helperText={Boolean(error) ? error : " "}
-            onChange={(e)=>{valueChange(e.target.value)}}
-        />
+        <div>
+            <TextField
+                size = {size}
+                className={className}
+                label={label}
+                required={required}
+                multiline={multiline}
+                rows={rows}
+                color={color}
+                value={value}
+                error={Boolean(error)}
+                onChange={(e)=>{valueChange(e.target.value)}}
+            />
+            <div>
+                <Collapse in={Boolean(error)} timeout="auto" unmountOnExit>
+                <Typography
+                    variant="caption"
+                    color="error"
+                    style={{ paddingLeft: "14px" }}
+                >
+                    {error}
+                </Typography>
+                </Collapse>
+            </div>
+        </div>
     )
 } 
 

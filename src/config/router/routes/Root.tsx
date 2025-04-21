@@ -66,20 +66,20 @@ function Root() {
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         backgroundAttachment: 'fixed',
+                        zIndex: '-1'
                     }}
-                >
-                    <div className="h-full w-full flex flex-col-reverse bottom-0 sm:flex-col">
-                        {displayContent ? <NavBar menuItems={menuItems} /> : null }
-                        <Grow in={displayContent} timeout={1000}>
-                            <div className="flex-grow flex overflow-y-auto w-full justify-center z-10">
-                                <Outlet />
-                            </div>
-                        </Grow>
-                    </div>
-                </Box>
+                />
                 :
                 null
             }
+            <div className="h-full w-full flex flex-col-reverse bottom-0 sm:flex-col">
+                <NavBar menuItems={menuItems} />
+                <Grow in={displayContent} timeout={1000}>
+                    <div className="flex-grow flex overflow-y-auto w-full justify-center z-10">
+                        <Outlet />
+                    </div>
+                </Grow>
+            </div>
         </div>
     )
 }

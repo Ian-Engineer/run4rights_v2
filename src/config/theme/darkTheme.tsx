@@ -1,6 +1,6 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles'
 import baseThemeOptions from './baseTheme'
-import { grey } from '@mui/material/colors'
+import { grey, red } from '@mui/material/colors'
 
 const darkThemeOptions: ThemeOptions = {
     ...baseThemeOptions,
@@ -22,6 +22,9 @@ const darkThemeOptions: ThemeOptions = {
             default: '#223843',
             // default: "#3F4A5F",
             paper: 'rgba(58, 92, 108, 0.88)',
+        },
+        error: {
+            main: red[200],
         },
     },
     components: {
