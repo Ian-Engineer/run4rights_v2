@@ -1,7 +1,6 @@
 import { Box, Button, Collapse, Typography } from "@mui/material"
-import IanPaper from "../_sharedComponents/IanPaper"
+import { IanPaper, IanTextField } from "sharedComponents"
 import { useState } from "react"
-import IanTextField from "../_sharedComponents/IanTextField";
 import emailjs from 'emailjs-com';
 
 type FieldKey = 'name' | 'email' | 'phone' | 'message';

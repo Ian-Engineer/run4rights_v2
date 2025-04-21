@@ -1,6 +1,6 @@
 import Root from "./Root";
-import Template from "../../../main/template";
-import ContactPage from '../../../../src/main/contact';
+import Template from "main/template";
+import ContactPage from 'main/contact';
 
 export default {
     Root,

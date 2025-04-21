@@ -1,15 +1,14 @@
-import { Box, AppBar, Toolbar, IconButton, Menu, MenuItem, useMediaQuery, useTheme, PopoverOrigin, Typography } from "@mui/material";
+import { Box, AppBar, Toolbar, IconButton, Menu, MenuItem, useMediaQuery, useTheme, PopoverOrigin } from "@mui/material";
 import { DarkMode, Email, Menu as MenuIcon } from "@mui/icons-material";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { navbar } from "../../config/models";
-import { useThemeMode } from "../../config/theme";
+import { navbar } from "models";
+import { useThemeMode } from "config/theme";
 
 function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
     const [ hobbyMenuAnchor, setHobbyMenuAnchor ] = useState<null | HTMLElement>(null);
     const { mode, toggleColorMode } = useThemeMode();
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
     const navigate = useNavigate();
 
 

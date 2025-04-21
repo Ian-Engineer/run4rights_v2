@@ -20,7 +20,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "main/*": ["./src/main/*"],
+      "sharedComponents": ["./src/main/_sharedComponents"],
+      "models": ["./src/config/models"],
+      "config/*": ["./src/config/*"]
+    }
   },
   "include": ["src"]
 }

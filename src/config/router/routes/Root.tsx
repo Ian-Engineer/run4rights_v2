@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Grow, Box } from "@mui/material";
-import NavBar from "../../../main/navbar";
-import { navbar } from "../../models";
+import NavBar from "main/navbar";
+import { navbar } from "models";
 
 const menuItems: navbar.navbarMenuItem[] = [
     {

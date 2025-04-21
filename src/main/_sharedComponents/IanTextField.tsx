@@ -1,7 +1,7 @@
 import { TextField, Collapse, Typography } from "@mui/material";
 import { useEffect } from "react";
 
-function IanTextField(
+export function IanTextField(
     {
         value,
         valueChange,
@@ -23,7 +23,7 @@ function IanTextField(
         rows?: number,
         color?: 'primary' | 'secondary' | 'error' | 'warning' | "info" | "success",
         error?: string | null,
-        size?: string
+        size?: "small" | "medium"
     }
 ) {
     return (
@@ -42,17 +42,15 @@ function IanTextField(
             />
             <div>
                 <Collapse in={Boolean(error)} timeout="auto" unmountOnExit>
-                <Typography
-                    variant="caption"
-                    color="error"
-                    style={{ paddingLeft: "14px" }}
-                >
-                    {error}
-                </Typography>
+                    <Typography
+                        variant="caption"
+                        color="error"
+                        style={{ paddingLeft: "14px" }}
+                    >
+                        {error}
+                    </Typography>
                 </Collapse>
             </div>
         </div>
     )
 } 
-
-export default IanTextField
