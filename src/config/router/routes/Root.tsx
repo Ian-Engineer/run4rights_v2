@@ -50,6 +50,21 @@ function Root() {
         }
     }, []);
 
+    useEffect(()=>{
+        const setViewHeight = () => {
+        const vh = window.innerHeight*0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+        }
+
+        setViewHeight();
+
+        window.addEventListener('resize', setViewHeight);
+
+        return () => {
+        window.removeEventListener('resize', setViewHeight)
+        }
+    },[])
+
 
     return (
         <div className="h-full w-full">
