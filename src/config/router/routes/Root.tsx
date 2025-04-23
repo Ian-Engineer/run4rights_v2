@@ -52,7 +52,7 @@ function Root() {
 
 
     return (
-        <div className="max-h-screen h-screen max-w-screen w-screen">
+        <div className="h-full w-full">
             { gifLoaded ? 
                 <Box
                     sx={{
@@ -68,6 +68,7 @@ function Root() {
                         backgroundAttachment: 'fixed',
                         zIndex: '-1'
                     }}
+                    className="h-full w-full"
                 />
                 :
                 null
