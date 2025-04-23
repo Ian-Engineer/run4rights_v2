@@ -1,5 +1,4 @@
 import { TextField, Collapse, Typography } from "@mui/material";
-import { useEffect } from "react";
 
 export function IanTextField(
     {

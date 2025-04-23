@@ -30,8 +30,8 @@ const menuItems: navbar.navbarMenuItem[] = [
         url: '/textiles'
     },
     {
-        name: 'Pottery',
-        url: '/pottery'
+        name: 'Ceramics',
+        url: '/ceramics'
     }
 ]
 
