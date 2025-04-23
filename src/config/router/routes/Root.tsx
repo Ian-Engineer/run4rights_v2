@@ -67,7 +67,7 @@ function Root() {
 
 
     return (
-        <div className="h-full w-full">
+        <div className="h-screen w-screen">
             { gifLoaded ? 
                 <Box
                     sx={{
