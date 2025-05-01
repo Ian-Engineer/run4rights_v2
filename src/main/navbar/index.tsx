@@ -1,14 +1,13 @@
-import { Box, AppBar, Toolbar, IconButton, Menu, MenuItem, useMediaQuery, useTheme, PopoverOrigin } from "@mui/material";
-import { DarkMode, Email, Menu as MenuIcon } from "@mui/icons-material";
-import LightModeIcon from '@mui/icons-material/LightMode';
+import { Box, AppBar, Toolbar, IconButton, Menu, MenuItem, useMediaQuery, useTheme, PopoverOrigin, Switch } from "@mui/material";
+import { Email, Menu as MenuIcon } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { navbar } from "models";
 import { useThemeMode } from "config/theme";
+import DarkModeSwitch from './DarkModeSwitch'
 
 function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
     const [ hobbyMenuAnchor, setHobbyMenuAnchor ] = useState<null | HTMLElement>(null);
-    const { mode, toggleColorMode } = useThemeMode();
     const navigate = useNavigate();
 
 
@@ -44,13 +43,7 @@ function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
                             </IconButton>
                         </div>
                         <div id='right side of menu'>
-                        <IconButton onClick={toggleColorMode}>
-                            {mode === 'light' ?
-                                <LightModeIcon />
-                            :
-                                <DarkMode />
-                            }
-                        </IconButton>
+                        <DarkModeSwitch />
                         <IconButton onClick={()=>navigate('/contact')}>
                             <Email />
                         </IconButton>

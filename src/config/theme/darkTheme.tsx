@@ -20,7 +20,6 @@ const darkThemeOptions: ThemeOptions = {
         },
         background: {
             default: '#223843',
-            // default: "#3F4A5F",
             paper: 'rgba(58, 92, 108, 0.88)',
         },
         error: {
