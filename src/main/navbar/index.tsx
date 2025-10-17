@@ -1,9 +1,8 @@
 import { Box, AppBar, Toolbar, IconButton, Menu, MenuItem, useMediaQuery, useTheme, PopoverOrigin, Switch } from "@mui/material";
-import { Email, Menu as MenuIcon } from "@mui/icons-material";
+import { CalendarMonth, Email, Home, Menu as MenuIcon } from "@mui/icons-material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { navbar } from "models";
-import { useThemeMode } from "config/theme";
 import DarkModeSwitch from './DarkModeSwitch'
 
 function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
@@ -31,15 +30,16 @@ function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
     }
 
     return (
-        <Box className="mt-3 mb-3">
-            <AppBar position="static">
+        <Box className="m-3">
+            <AppBar position="static" className="rounded-4xl">
                 <Toolbar className='w-full'>
                     <Box className='flex flex-row justify-between w-full'>
                         <div id="left side of menu" className="flex flex-row items-center align-center gap-4">
-                            <IconButton
-                                onClick={handleHobbyMenuClick}
-                                >
-                                <MenuIcon />
+                            <IconButton onClick={()=>navigate("/")}>
+                                <Home />
+                            </IconButton>
+                            <IconButton onClick={() => navigate("/events" )}>
+                                <CalendarMonth />
                             </IconButton>
                         </div>
                         <div id='right side of menu'>

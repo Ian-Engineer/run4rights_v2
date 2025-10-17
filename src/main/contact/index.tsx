@@ -1,5 +1,5 @@
 import { Box, Button, Collapse, Typography } from "@mui/material"
-import { IanPaper, IanTextField } from "sharedComponents"
+import { Run4RightsPaper, Run4RightsTextField } from "sharedComponents"
 import { useState } from "react"
 import emailjs from 'emailjs-com';
 
@@ -48,33 +48,6 @@ function ContactPage() {
     }
   };
 
-  const formatPhoneNumber = (value: string) => {
-    // Remove all non-digit characters
-    const cleaned = value.replace(/\D/g, "").slice(0, 10); // Cap to 10 digits
-
-    // Format based on length
-    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
-    if (!match) return cleaned;
-
-    let formatted = "";
-    if (match[1]) {
-      formatted += `(${match[1]}`;
-    }
-    if (match[2]) {
-      formatted += match[2].length === 3 ? `) ${match[2]}` : match[2];
-    }
-    if (match[3]) {
-      formatted += `-${match[3]}`;
-    }
-
-    return formatted;
-  };
-
-  const handlePhoneNumberChange = (value: string) => {
-    const formatted = formatPhoneNumber(value);
-    handleChange('phone', formatted)
-  }
-
   const handleSubmit = () => {
     let hasError = false;
     const newErrors: Record<FieldKey, string | null> = { ...initialErrors };
@@ -89,9 +62,6 @@ function ContactPage() {
     } else if (!isValidEmail(formValues.email)) {
       newErrors.email = 'Invalid email format'
     }
-    if (formValues.phone.length > 0 && !isValidPhoneNumber(formValues.phone)) {
-      newErrors.phone = "Phone number must be 10 digits";
-    }
     if (!formValues.message.trim()) {
       newErrors.message = 'Required';
       hasError = true;
@@ -104,11 +74,12 @@ function ContactPage() {
         name: formValues.name,
         email: formValues.email,
         time: new Date(),
-        message: `${formValues.message}${formValues.phone? `\n\n${formValues.name} provided their phone number: ${formValues.phone}` : ''}`,
+        message: formValues.message,
+        to_email: "i.c.swensson@hotmail.com"
       };
       emailjs.send(
-        'service_05brftm', 
-        'template_gido9bh', 
+        'service_2ac8ous', 
+        'template_s610c99', 
         templateParams, 
         'DcfZGSVMzQkbU_Fin'
       )
@@ -124,14 +95,14 @@ function ContactPage() {
   return (
     <div className="w-full m-8 mb-4 flex flex-row items-center">
       <div className="w-full sm:w-1/3 flex justify-center items-center">
-        <IanPaper className={"flex justify-center items-center max-w-sm w-full h-fit overflow-hidden"}>
+        <Run4RightsPaper className={"flex justify-center items-center max-w-sm w-full h-fit overflow-hidden"}>
           <Box className="m-4 flex flex-col gap-4 w-full overflow-hidden">
             <Typography variant="h4">
               {header}
             </Typography>
             <Collapse in={!submitted}>
               <div className="flex flex-col gap-4 w-full">
-                <IanTextField
+                <Run4RightsTextField
                   value={formValues.name}
                   valueChange={(val: string) => handleChange('name', val)}
                   className="w-full"
@@ -139,7 +110,7 @@ function ContactPage() {
                   required
                   error={formErrors.name}
                 />
-                <IanTextField
+                <Run4RightsTextField
                   value={formValues.email}
                   valueChange={(val: string) => handleChange('email', val)}
                   className="w-full"
@@ -147,14 +118,7 @@ function ContactPage() {
                   required
                   error={formErrors.email}
                 />
-                <IanTextField
-                  value={formValues.phone}
-                  valueChange={(val: string) => handlePhoneNumberChange(val)}
-                  className="w-full"
-                  label="Phone"
-                  error={formErrors.phone}
-                />
-                <IanTextField
+                <Run4RightsTextField
                   value={formValues.message}
                   valueChange={(val: string) => handleChange('message', val)}
                   className="w-full"
@@ -185,11 +149,11 @@ function ContactPage() {
             </Collapse>
             <Collapse in={submitted}>
               <Typography variant="h6">
-                Your message has been sent to Ian Swensson.
+                Thanks you. Your message has been sent to run4rights admin.
               </Typography>
             </Collapse>
           </Box>
-        </IanPaper>
+        </Run4RightsPaper>
       </div>
     </div>
   )

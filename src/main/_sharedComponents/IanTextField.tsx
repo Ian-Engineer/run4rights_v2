@@ -1,6 +1,6 @@
 import { TextField, Collapse, Typography } from "@mui/material";
 
-export function IanTextField(
+export function Run4RightsTextField(
     {
         value,
         valueChange,

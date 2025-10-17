@@ -17,28 +17,16 @@ const router = createBrowserRouter([
           Component: Routes.ContactPage,
         },
         {
-          path: '/software',
-          Component: Routes.SoftwarePage,
+          path: '/events',
+          Component: Routes.EventsPage,
         },
         {
-          path: '/woodworking',
-          Component: Routes.WoodworkingPage,
+          path: '/event/:id',
+          Component: Routes.EventPage
         },
         {
-          path: '/ceramics',
-          Component: Routes.CeramicsPage,
-        },
-        {
-          path: '/3d_printing',
-          Component: Routes.ThreeDPrintingPage,
-        },
-        {
-          path: '/textiles',
-          Component: Routes.TextilesPage
-        },
-        {
-          path: '/adventures',
-          Component: Routes.AdventuresPage,
+          path: "*",
+          Component: Routes.ErrorPage,
         }
     ]
   },
