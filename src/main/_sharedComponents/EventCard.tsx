@@ -92,7 +92,7 @@ const EventCard = ({event, size = 'xl', future = false}: {event: Events.Event, s
     const renderDate = (event: Events.Event, size: string) => {
         return (
             <Box sx={{backgroundColor: "white", borderRadius: "50px", margin: "10px", padding: "10px", textAlign: "center", display: "flex", alignItems: "center"}}>
-                <Typography variant={dimensions[size].header}>{formatCustomDate(new Date(event.date))}</Typography>
+                <Typography variant={dimensions[size].header}>{formatCustomDate(new Date(event.eventDate))}</Typography>
             </Box>
         )
     }

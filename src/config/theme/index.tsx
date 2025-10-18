@@ -23,6 +23,8 @@ export const useThemeMode = () => {
 
 export const ThemeModeProvider = ({ children }:{ children: React.ReactNode }) => {
     const getInitialMode = (): ColorMode => {
+        return 'light'
+
         const saved = localStorage.getItem(localStorageColorModeKey) as ColorMode | null;
         if (saved === 'light' || saved === 'dark') return saved;
         

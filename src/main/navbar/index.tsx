@@ -1,70 +1,44 @@
-import { Box, AppBar, Toolbar, IconButton, Menu, MenuItem, useMediaQuery, useTheme, PopoverOrigin, Switch } from "@mui/material";
-import { CalendarMonth, Email, Home, Menu as MenuIcon } from "@mui/icons-material";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { navbar } from "models";
+import { Box, AppBar, Toolbar, IconButton, useTheme, Typography, Tooltip } from "@mui/material";
+import { CalendarMonth, Email, Home } from "@mui/icons-material";
+import { useNavigate, useLocation } from "react-router-dom";
 import DarkModeSwitch from './DarkModeSwitch'
 
-function NavBar({menuItems}: {menuItems: navbar.navbarMenuItem[]}) {
-    const [ hobbyMenuAnchor, setHobbyMenuAnchor ] = useState<null | HTMLElement>(null);
+function NavBar() {
     const navigate = useNavigate();
+    const location = useLocation();
 
-
-    const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-    const menuAnchorOrigin: PopoverOrigin = isSmallScreen
-    ? { vertical: 'top', horizontal: 'left' }
-    : { vertical: 'bottom', horizontal: 'left' };
-
-    const menuTransformOrigin: PopoverOrigin = isSmallScreen
-    ? { vertical: 'bottom', horizontal: 'left' }
-    : { vertical: 'top', horizontal: 'left' };
-
-    const handleHobbyMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setHobbyMenuAnchor(event?.currentTarget)
-    }
-
-    const handleHobbyMenuClose = () => {
-        setHobbyMenuAnchor(null);
+    function clickLogo() {
+        if (location.pathname !== "/") navigate("/")
     }
 
     return (
-        <Box className="m-3">
-            <AppBar position="static" className="rounded-4xl">
+        <Box>
+            <AppBar position="static">
                 <Toolbar className='w-full'>
-                    <Box className='flex flex-row justify-between w-full'>
-                        <div id="left side of menu" className="flex flex-row items-center align-center gap-4">
+                    <Box className='flex flex-row justify-between align-center w-full h-18'>
+                        <div id="left side of menu" className="flex items-center align-center">
+                            <Typography variant="h4" color="textPrimary" onClick={clickLogo} className="hover:cursor-pointer">
+                                Run4Rights
+                            </Typography>
+                        </div>
+                        <div id='right side of menu' className="flex flex-row items-center align-center sm:gap-8 gap-4">
+                        {/* <DarkModeSwitch /> */}
+                        <Tooltip title="Home">
                             <IconButton onClick={()=>navigate("/")}>
                                 <Home />
                             </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Events">
                             <IconButton onClick={() => navigate("/events" )}>
                                 <CalendarMonth />
                             </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Contact Us">
+                            <IconButton onClick={()=>navigate('/contact')}>
+                                <Email />
+                            </IconButton>
+                        </Tooltip>
                         </div>
-                        <div id='right side of menu'>
-                        <DarkModeSwitch />
-                        <IconButton onClick={()=>navigate('/contact')}>
-                            <Email />
-                        </IconButton>
-                        </div>
-
-                        <Menu
-                            anchorEl={hobbyMenuAnchor}
-                            open={Boolean(hobbyMenuAnchor)}
-                            onClose={handleHobbyMenuClose}
-                            anchorOrigin={menuAnchorOrigin}
-                            transformOrigin={menuTransformOrigin}
-                        >
-                            {menuItems.map((item) => (
-                                <MenuItem
-                                    key={item.name}
-                                    onClick={() => {handleHobbyMenuClose(); navigate(item.url)}}
-                                >
-                                    {item.name}
-                                </MenuItem>
-                            ))}
-                        </Menu>
                     </Box>
                 </Toolbar>
             </AppBar>

@@ -1,11 +1,17 @@
-import { Button } from "@mui/material";
-import { ReactElement } from "react";
+import { Button, Typography } from "@mui/material";
 
-export function Run4RightsButton({children, className, onClick}: {children: ReactElement, className?: string, onClick: Function}) {
+const placeHolderOnClick = (text: string) => {
+    console.error("No onclick provided for button: ", text)
+}
+
+export function Run4RightsButton({text, className = "", onClick = () => placeHolderOnClick(text)}: {text: string, className?: string, onClick?: Function}) {
+
     return (
         <div className={className}>
-            <Button color="secondary.contrastText" className="flex justify-center align-center w-full h-full" onClick={()=>{onClick()}}>
-                {children}
+            <Button color="secondary" className={className} onClick={()=>{onClick()}} sx={{ }}>
+                <Typography variant='h5' fontWeight={'500'} className="pr-2 pl-2">
+                    {text}
+                </Typography>
             </Button>
         </div>
     )

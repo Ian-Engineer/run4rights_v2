@@ -2,15 +2,26 @@ import { ThemeOptions } from "@mui/material";
 
 const baseThemeOptions: ThemeOptions = {
   typography: {
-    fontFamily: ['Roboto', 'Helvetica'].join(','),
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          textTransform: 'capitalize',
+    fontFamily: ['Montserrat'].join(','),
+      h4: {
+        '@media (max-width:600px)': {
+          fontSize: '1.5rem',
         },
       },
+      h3: {
+        '@media (max-width:600px)': {
+          fontSize: '2.25rem',
+        },
+      },
+      h2: {
+        '@media (max-width:600px)': {
+          fontSize: '3rem',
+        },
+      }
+  },
+  components: {
+    MuiTypography: {
+
     },
     MuiPaper: {
       styleOverrides: {

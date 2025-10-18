@@ -1,6 +1,6 @@
 export interface Event {
     id: string;
-    date: string;
+    eventDate: string;
     organization: string;
     moneyRaised: number;
     active: boolean;
@@ -9,6 +9,6 @@ export interface Event {
 
 export interface EventsSorted {
     active: Event;
-    past: Event[];
+    past: {[key: string]: Event[]};
     future: Event[];
 }

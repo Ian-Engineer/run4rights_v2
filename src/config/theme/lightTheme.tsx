@@ -2,29 +2,27 @@ import { createTheme, ThemeOptions } from '@mui/material/styles'
 import baseThemeOptions from './baseTheme';
 import { grey, red } from '@mui/material/colors'
 
-const tenPercent: string = "#177E89";
-const thirtyPercent: string = "#EF8354";
-const sixtyPercent: string = "#60463B";
-const pageBackground: string = "#DBD8B3";
-const textColor: string = "#000"
-const contrastTextColor: string = "#FFF"
+const tenPercent: string = "#402d28";
+const thirtyPercent: string = "#b65636";
+const sixtyPercent: string = "#174d4d";
+const pageBackground: string = "#dfc7a2";
+const textColor: string = "#dfc7a2"
 
 const lightThemeOptions: ThemeOptions = {
     ...baseThemeOptions,
     palette: {
         primary: {
-            main: textColor,
+            main: sixtyPercent,
         },
         secondary: {
-            main: contrastTextColor,
+            main: thirtyPercent,
         },
         background: {
             default: pageBackground,
             paper: sixtyPercent,
         },
         text: {
-            primary: textColor,
-            secondary: contrastTextColor
+            primary: textColor
         },
         error: {
             main: red[200],
@@ -36,7 +34,7 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: ({ theme }) => ({
                     '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: theme.palette.textField.border,
+                        borderColor: sixtyPercent,
                     },
                 }),
             },
@@ -44,25 +42,28 @@ const lightThemeOptions: ThemeOptions = {
         MuiSvgIcon: {
             styleOverrides: {
                 root: {
-                    color: contrastTextColor,
+                    color: textColor,
                 },
             },
         },
         MuiButton: {
             styleOverrides: {
                 root: {
-                    backgroundColor: tenPercent, // ← your custom color
+                    backgroundColor: thirtyPercent,
                     '&:hover': {
                         filter: "brightness(90%)"
                     },
-                    color: contrastTextColor,
+                    color: textColor,
+                    borderRadius: "50px",
+                    textTransform: 'none'
                 },
             }
         },
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    backgroundColor: sixtyPercent
+                    backgroundColor: tenPercent,
+                    borderRadius: '0px'
                 }
             }
         },
@@ -70,6 +71,7 @@ const lightThemeOptions: ThemeOptions = {
             styleOverrides: {
                 root: {
                     backgroundColor: thirtyPercent,
+                    borderRadius: "5px"
                 }
             }
         }
