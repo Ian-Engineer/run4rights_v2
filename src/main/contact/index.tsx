@@ -61,6 +61,7 @@ function ContactPage() {
       hasError = true;
     } else if (!isValidEmail(formValues.email)) {
       newErrors.email = 'Invalid email format'
+      hasError = true;
     }
     if (!formValues.message.trim()) {
       newErrors.message = 'Required';
@@ -75,7 +76,6 @@ function ContactPage() {
         email: formValues.email,
         time: new Date(),
         message: formValues.message,
-        to_email: "i.c.swensson@hotmail.com"
       };
       emailjs.send(
         'service_2ac8ous', 
