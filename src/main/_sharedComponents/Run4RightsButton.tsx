@@ -9,7 +9,7 @@ export function Run4RightsButton({text, className = "", onClick = () => placeHol
     return (
         <div className={className}>
             <Button color="secondary" className={className} onClick={()=>{onClick()}} sx={{ }}>
-                <Typography variant='h5' fontWeight={'500'} className="pr-2 pl-2">
+                <Typography noWrap={true} variant='h5' fontWeight={'700'} className="pr-2 pl-2">
                     {text}
                 </Typography>
             </Button>

@@ -5,8 +5,8 @@ import { grey, red } from '@mui/material/colors'
 const tenPercent: string = "#402d28";
 const thirtyPercent: string = "#b65636";
 const sixtyPercent: string = "#174d4d";
-const pageBackground: string = "#dfc7a2";
-const textColor: string = "#dfc7a2"
+const pageBackground: string = "#F5DAB1"; //F5DAB1
+const textColor: string = "#F5DAB1" //dfc7a2
 
 const lightThemeOptions: ThemeOptions = {
     ...baseThemeOptions,
@@ -25,18 +25,42 @@ const lightThemeOptions: ThemeOptions = {
             primary: textColor
         },
         error: {
-            main: red[200],
+            main: red[600],
         },
     },
     components: {
         ...baseThemeOptions.components,
+        MuiInputBase: {
+            styleOverrides: {
+                input: {
+                    color: sixtyPercent,
+                    fontWeight: 600,
+                },
+            },
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+            root: {
+                color: sixtyPercent, // default label color
+                '&.Mui-focused': {
+                color: sixtyPercent, // label color when focused
+                },
+            },
+            },
+        },
         MuiOutlinedInput: {
             styleOverrides: {
-                root: ({ theme }) => ({
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: sixtyPercent,
+                root: {
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: sixtyPercent,
                     },
-                }),
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: sixtyPercent,
+                    },
+                },
+                notchedOutline: {
+                    borderColor: sixtyPercent,
+                },
             },
         },
         MuiSvgIcon: {

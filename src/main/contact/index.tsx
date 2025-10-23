@@ -1,5 +1,5 @@
 import { Box, Button, Collapse, Typography } from "@mui/material"
-import { Run4RightsPaper, Run4RightsTextField } from "sharedComponents"
+import { Run4RightsButton, Run4RightsPaper, Run4RightsTextField } from "sharedComponents"
 import { useState } from "react"
 import emailjs from 'emailjs-com';
 
@@ -39,7 +39,7 @@ function ContactPage() {
   const [formErrors, setFormErrors] = useState(initialErrors);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<string | null>(null)
-  const [header, setHeader] = useState<string>('Get in touch!')
+  const [header, setHeader] = useState<string>('Contact Us')
 
   const handleChange = (field: FieldKey, value: string) => {
     setFormValues(prev => ({ ...prev, [field]: value }));
@@ -93,67 +93,81 @@ function ContactPage() {
   };
 
   return (
-    <div className="w-full m-8 mb-4 flex flex-row items-center">
-      <div className="w-full sm:w-1/3 flex justify-center items-center">
-        <Run4RightsPaper className={"flex justify-center items-center max-w-sm w-full h-fit overflow-hidden"}>
-          <Box className="m-4 flex flex-col gap-4 w-full overflow-hidden">
-            <Typography variant="h4">
-              {header}
-            </Typography>
-            <Collapse in={!submitted}>
-              <div className="flex flex-col gap-4 w-full">
-                <Run4RightsTextField
-                  value={formValues.name}
-                  valueChange={(val: string) => handleChange('name', val)}
-                  className="w-full"
-                  label="Your Name"
-                  required
-                  error={formErrors.name}
-                />
-                <Run4RightsTextField
-                  value={formValues.email}
-                  valueChange={(val: string) => handleChange('email', val)}
-                  className="w-full"
-                  label="Email"
-                  required
-                  error={formErrors.email}
-                />
-                <Run4RightsTextField
-                  value={formValues.message}
-                  valueChange={(val: string) => handleChange('message', val)}
-                  className="w-full"
-                  label="Message"
-                  required
-                  multiline
-                  rows={4}
-                  color="secondary"
-                  error={formErrors.message}
-                />
-                <Button
-                  variant="contained"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-                <Collapse in={Boolean(submitError)}>
-                <div className="flex flex-col text-center items-center">
-                  <Typography>
-                    Error sending message:
-                  </Typography>
-                  <Typography color="error">
-                    {submitError}
-                  </Typography>
-                </div>
-                </Collapse>
-              </div>
-            </Collapse>
-            <Collapse in={submitted}>
-              <Typography variant="h6">
-                Thanks you. Your message has been sent to run4rights admin.
+    <div className="w-full flex flex-row">
+      <div className="w-3/5 sm:block hidden" id='left-side'>
+        <Box className="w-full h-1/2 flex flex-col-reverse text-right p-8" sx={{backgroundColor: "primary.main"}}>
+          <Typography variant="h1" fontWeight={700}>{header}</Typography>
+        </Box>
+        <div className="flex flex-col justify-center m-8 gap-2">
+          <Typography variant="h6"  className="" color="primary">
+            Your voice keeps us running.
+          </Typography>
+          <Typography variant="h6" className="" color="primary">
+            Whether you're a donor, runner, nonprofit partner, or someone curious about what we do - we'd love to hear from you.
+          </Typography>
+          <Typography variant="h6" className="" color="primary">
+            Reach out anytime with questions, feedback, or partnership ideas.
+          </Typography>
+        </div>
+      </div>
+      <div className="max-w-96 flex flex-row justify-center grow items-center ml-8 mr-8" id='right-side'>
+        <div className="w-full flex justify-center items-center">
+            <Box className="p-4 flex flex-col gap-4 w-full overflow-hidden">
+              <Typography className="block sm:hidden" fontWeight={600} variant="h4" color="primary">
+                {header}
               </Typography>
-            </Collapse>
-          </Box>
-        </Run4RightsPaper>
+              <Collapse in={!submitted}>
+                <div className="flex flex-col gap-4 w-full">
+                  <Run4RightsTextField
+                    value={formValues.name}
+                    valueChange={(val: string) => handleChange('name', val)}
+                    className="w-full"
+                    label="Your Name"
+                    required
+                    error={formErrors.name}
+                  />
+                  <Run4RightsTextField
+                    value={formValues.email}
+                    valueChange={(val: string) => handleChange('email', val)}
+                    className="w-full"
+                    label="Email"
+                    required
+                    error={formErrors.email}
+                  />
+                  <Run4RightsTextField
+                    value={formValues.message}
+                    valueChange={(val: string) => handleChange('message', val)}
+                    className="w-full"
+                    label="Message"
+                    required
+                    multiline
+                    rows={7}
+                    color="secondary"
+                    error={formErrors.message}
+                  />
+                  <Run4RightsButton
+                    text="Submit"
+                    onClick={handleSubmit}
+                  />
+                  <Collapse in={Boolean(submitError)}>
+                  <div className="flex flex-col text-center items-center">
+                    <Typography>
+                      Error sending message:
+                    </Typography>
+                    <Typography color="error">
+                      {submitError}
+                    </Typography>
+                  </div>
+                  </Collapse>
+                </div>
+              </Collapse>
+              <Collapse in={submitted}>
+                <Typography variant="h6">
+                  Thanks you. Your message has been sent to run4rights admin.
+                </Typography>
+              </Collapse>
+            </Box>
+        </div>
       </div>
     </div>
   )

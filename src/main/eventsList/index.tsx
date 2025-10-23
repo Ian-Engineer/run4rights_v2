@@ -1,7 +1,7 @@
 import { ReactComponentElement, ReactElement, useEffect, useState } from 'react'
 import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
-import { Box, Collapse, Typography } from '@mui/material'
+import { Box, Collapse, Divider, Typography } from '@mui/material'
 import { ApiResponse, EventsSorted, Event } from 'models';
 import EventCard from 'main/_sharedComponents/EventCard';
 import api from "../../api"
@@ -16,12 +16,14 @@ function EventsPage() {
   const [error ,setError] = useState<boolean>(false);
 
   useEffect(()=>{
-    api.getRequest("/events/sorted")
+    if (loading) api.getRequest("/events/sorted")
       .then((response: ApiResponse<EventsSorted>) => {
         if (response.success) {
           setPastEvents(response.data.past || {});
           setUpcomingEvents(response.data.future || []);
           setActiveEvents(response.data.active || null);
+        } else {
+          setError(true)
         }
       })
       .catch(error => {
@@ -31,7 +33,8 @@ function EventsPage() {
       .finally(()=>{
         setLoading(false)
       })
-  },[])
+  },[error])
+
 
   const SectionRender = ({title, children}: {title: string, children?: React.ReactNode}) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -44,7 +47,9 @@ function EventsPage() {
           </Typography>
         </Box>
         <Collapse in={open} timeout={700}>
+          <div className="ml-2 mr-2">
             {children}
+          </div>
         </Collapse>
       </div>
     )
@@ -52,47 +57,52 @@ function EventsPage() {
 
   return (
       <div className='flex flex-row w-full h-fit min-h-full'>
-        <div className='flex flex-col gap-10 items-center text-center w-full sm:w-2/5 mt-4 mb-4'>
+        <div className='flex flex-col gap-10 items-center text-center w-full mt-4 mb-4'>
           <SectionRender title={"Active Events"}>
             <>
             {activeEvent ? 
               <EventCard event={activeEvent} future={true} key={`eventCardFor:${activeEvent.organization}-on-${activeEvent.eventDate}`}/>
               :
-              <Typography color='primary'>{error ? "Error getting event details. Try again soon." : "Currently, there are no active events."}</Typography>
+              <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : "Currently, there are no active events."}</Typography>
             }
             </>
           </SectionRender>
           <SectionRender title={"Upcoming Events"}>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-6">
               {
                 upcomingEvents.length ? upcomingEvents.map((event) => 
                   <EventCard event={event} future={true} key={`eventCardFor:${event.organization}-on-${event.eventDate}`}/>
                 )
                   :
-              <Typography color='primary'>{error ? "Error getting event details. Try again soon." : "Currently, there are no upcoming events scheduled."}</Typography>
+                <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : "Currently, there are no upcoming events scheduled."}</Typography>
               }
             </div>
           </SectionRender>
           <SectionRender title={"Past Events"}>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-6">
                 { Object.keys(pastEvents).length > 0 ?
                   Object.keys(pastEvents).sort((a, b) => Number(b) - Number(a)).map((value: string) => {
-                    return (
+                    return (  
                       <div key={`eventListForPastEventYear:${value}`}>
-                        <Typography variant='h4' color='primary'>{value}</Typography>
-                        {pastEvents[value].map(event => {
-                          return <EventCard event={event} key={`eventCardFor:${event.organization}-on-${event.eventDate}`}/>
-                        })}
+                        <div className='flex flex-col'>
+                          <Divider sx={{backgroundColor: "primary.main"}}  />
+                          <Typography variant='h4'  color='primary' fontWeight={600}>{value}</Typography>
+                          <Divider sx={{backgroundColor: "primary.main"}}  />
+                        </div>
+                        <div className="flex flex-col gap-6">
+                          {pastEvents[value].map(event => {
+                            return <EventCard event={event} key={`eventCardFor:${event.organization}-on-${event.eventDate}`}/>
+                          })}
+                        </div>
                       </div>
                     )
                   })
                   :
-                  <Typography color='primary'>{error ? "Error getting event details. Try again soon." : null}</Typography>
+                  <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : null}</Typography>
                 }
               </div>
           </SectionRender>
         </div>
-        <Box className="w-3/5 hidden sm:block" sx={{backgroundColor: "primary.main"}}></Box>
       </div>
   )
 }

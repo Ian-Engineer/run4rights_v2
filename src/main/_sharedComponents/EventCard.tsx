@@ -1,13 +1,14 @@
 import { Box, Typography, Grow } from "@mui/material"
 import { Person } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import { Events } from "models";
+import { ReactNode, useEffect, useState } from "react";
+import { Event } from "models";
 import { Run4RightsPaper } from "./IanPaper";
 import { useNavigate } from "react-router-dom";
+import { Run4RightsButton } from "./Run4RightsButton";
 
     const dimensions: any = {
         small: {
-            header: 'h4',
+            header: 'h5',
             body: 'body3',
             roleIcon: 'xs',
             imageSize: '60px',
@@ -17,7 +18,7 @@ import { useNavigate } from "react-router-dom";
             backupImagePlaceholder: '30px',
         },
         medium: {
-            header: 'h3',
+            header: 'h4',
             body: 'body2',
             roleIcon: 'small',
             imageSize: '72px',
@@ -25,12 +26,15 @@ import { useNavigate } from "react-router-dom";
             backupImage: 'large',
             imagePlaceholder: '57px',
             backupImagePlaceholder: '36px',
+            dateSquareSize: "size-24",
+            borderRadius: "10px",
+            dateSize: "h3"
         },
         large: {
 
         },
         xl: {
-            header: 'h5',
+            header: 'h3',
             body: 'body2',
             roleIcon: 'xl',
             imageSize: '96px',
@@ -39,10 +43,11 @@ import { useNavigate } from "react-router-dom";
             imagePlaceholder: '114px',
             backupImagePlaceholder: '72px',
             textTranslate: 'translatex(80px)',
+            dateSquareSize: "size-32"
         }
     }
 
-const EventCard = ({event, size = 'xl', future = false}: {event: Events.Event, size?: string, future?: boolean}) => {
+const EventCard = ({event, size = 'medium', future = false}: {event: Event, size?: string, future?: boolean}) => {
     const [imageError, setImageError] = useState(false)
     const [loaded, setLoaded] = useState(true);
     const navigate = useNavigate();
@@ -57,26 +62,37 @@ const EventCard = ({event, size = 'xl', future = false}: {event: Events.Event, s
     }
     
 
-    const renderText = (event: Events.Event, size: string) => {
+    const RenderText = ({event, size}: {event: Event, size: string}) => {
         return (
             <Box
-                className='flex flex-col w-full gap-2 justify-around text-center'
+                className='flex flex-col w-full gap-2 text-left'
+                sx={{color: "primary.main"}}
             >
                 <Typography variant={dimensions[size].header}>
                     {event.organization}
                 </Typography>
-                {future ? 
-                    null 
-                :
-                    <Typography variant={dimensions[size].body} fontWeight={'bold'} className="text-right pr-2">
-                        Money Raised: {formatToDollars(event.raised)}
+                {event.description ? 
+                    <Typography className="hidden sm:block" variant={dimensions[size].body}>
+                        {event.description}
                     </Typography>
+                    :
+                    null
                 }
+                <div className="flex flex-row justify-between items-center">
+                    <Run4RightsButton text={"See More"} onClick={handleClick}/>
+                    {future ? 
+                        null 
+                    :
+                        <Typography variant={dimensions[size].body} fontWeight={'bold'} className="text-right pr-2">
+                            Money Raised: {formatToDollars(event.moneyRaised)}
+                        </Typography>
+                    }
+                </div>
             </Box>
         )
     }
 
-    function formatCustomDate(date: Date): string {
+    function formatCustomDate(date: Date) {
         const months = [
             "Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -84,15 +100,27 @@ const EventCard = ({event, size = 'xl', future = false}: {event: Events.Event, s
 
         const month = months[date.getMonth()];
         const day = date.getDate();
-        const year = date.getFullYear();
 
-        return `${month} ${day} ${year}`;
+        return {month, day};
     }
 
-    const renderDate = (event: Events.Event, size: string) => {
+    const RenderDate = ({event, size}: {event: Event, size: string}): ReactNode => {
+        let date = formatCustomDate(new Date(event.eventDate));
         return (
-            <Box sx={{backgroundColor: "white", borderRadius: "50px", margin: "10px", padding: "10px", textAlign: "center", display: "flex", alignItems: "center"}}>
-                <Typography variant={dimensions[size].header}>{formatCustomDate(new Date(event.eventDate))}</Typography>
+            <Box 
+                sx={{
+                    backgroundColor: "secondary.main", 
+                    borderRadius: dimensions[size].borderRadius, 
+                    margin: "10px", 
+                    padding: "10px", 
+                    textAlign: "center", 
+                    display: "flex", 
+                    alignItems: "center"
+                }}
+                className='flex flex-col align-center justify-center text-center max-h-fit'
+            >
+                <Typography fontWeight={700} variant={dimensions[size].dateSize}>{date.month}</Typography>
+                <Typography fontWeight={700} variant={dimensions[size].dateSize}>{date.day}</Typography>
             </Box>
         )
     }
@@ -102,15 +130,9 @@ const EventCard = ({event, size = 'xl', future = false}: {event: Events.Event, s
     }
 
     return (
-        <div onClick={handleClick}>
-        <Run4RightsPaper
-            className={`flex flex-row items-center w-full min-w-fit relative hover:cursor-pointer hover:scale-102`}
-        >
-            <>
-                {renderDate(event, size)}
-                {renderText(event, size)}
-            </>
-        </Run4RightsPaper>
+        <div className="flex flex-row gap-6 items-center">
+            <RenderDate event={event} size={size}/>
+            <RenderText event={event} size={size}/>
         </div>
     )
 }

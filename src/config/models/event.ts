@@ -5,6 +5,7 @@ export interface Event {
     moneyRaised: number;
     active: boolean;
     donationsOpen: boolean;
+    description: string;
 }
 
 export interface EventsSorted {
