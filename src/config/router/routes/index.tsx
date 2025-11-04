@@ -5,6 +5,7 @@ import HomePage from "main/home";
 import EventsPage from "main/eventsList";
 import EventPage from "main/event";
 import ErrorPage from "main/404";
+import PrivacyPolicy from "main/privacyPolicy";
 
 export default {
     Root,
@@ -14,4 +15,5 @@ export default {
     EventsPage,
     EventPage,
     ErrorPage,
+    PrivacyPolicy
 }
