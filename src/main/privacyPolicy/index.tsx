@@ -20,7 +20,7 @@ export default function PrivacyPolicy({
     function RenderSection({title, idName, children}:  {title: string, idName: string, children: ReactElement}) {
         return (
             <div>
-                <Typography color="primary" variant="h4" id={idName} sx={{ scrollMarginTop: 80 }}>{title}</Typography>
+                <Typography color="primary" variant="h4" id={idName} sx={{ scrollMarginTop: 20 }}>{title}</Typography>
                 <div className="p-4 pb-0">
                     {children}
                 </div>
@@ -70,8 +70,8 @@ export default function PrivacyPolicy({
                             <Typography color="primary" variant="h5">Runners</Typography>
                             <Typography color="primary" variant="body2">If you are a runner that has requested to participate and given approval from us, we collect only what’s necessary to manage your participation: </Typography>
                             <List>
-                                <ListItem ><Typography color="primary">Name</Typography></ListItem>
-                                <ListItem><Typography color="primary"><strong>Activity connection information</strong> required to connect to your Garmin account (e.g., OAuth tokens/credentials handled through Garmin’s API)</Typography></ListItem>
+                                <ListItem ><Typography color="primary" variant="body2">Name</Typography></ListItem>
+                                <ListItem><Typography color="primary" variant="body2"><strong>Activity connection information</strong> required to connect to your Garmin account (e.g., OAuth tokens/credentials handled through Garmin’s API)</Typography></ListItem>
                             </List>
                             <Typography color="primary" variant="body2">We use this data solely to track your activity for event purposes. </Typography>
                             <Typography color="primary" variant="h6">Data minimization</Typography>
@@ -81,9 +81,9 @@ export default function PrivacyPolicy({
                     <RenderSection title={"2. How We Use Information"} idName="use">
                         <>
                             <List>
-                                <ListItem><Typography color="primary">Facilitate donations and show fundraising progress</Typography></ListItem>
-                                <ListItem><Typography color="primary">Track runner activity for event mileage and milestones</Typography></ListItem>
-                                <ListItem><Typography color="primary">Maintain secure connections with third-party services (e.g., Garmin)</Typography></ListItem>
+                                <ListItem><Typography color="primary" variant="body2">Facilitate donations and show fundraising progress</Typography></ListItem>
+                                <ListItem><Typography color="primary" variant="body2">Track runner activity for event mileage and milestones</Typography></ListItem>
+                                <ListItem><Typography color="primary" variant="body2">Maintain secure connections with third-party services (e.g., Garmin)</Typography></ListItem>
                             </List>
                             <Typography color="primary" variant="body2">
                                 We <strong>do not sell, rent, or share</strong> personal information with third parties for marketing or advertising.
@@ -92,17 +92,17 @@ export default function PrivacyPolicy({
                     </RenderSection>
                     <RenderSection title={"3. Data Storage and Security"} idName="security">
                         <List>
-                            <ListItem><Typography color="primary">Donor payment data is handled entirely by Stripe.</Typography></ListItem>
-                            <ListItem><Typography color="primary">Runner data is stored securely and used only for the duration of event needs.</Typography></ListItem>
-                            <ListItem><Typography color="primary">We implement reasonable technical and organizational measures to protect data from unauthorized access, disclosure, or misuse.</Typography></ListItem>
+                            <ListItem><Typography color="primary" variant="body2">Donor payment data is handled entirely by Stripe.</Typography></ListItem>
+                            <ListItem><Typography color="primary" variant="body2">Runner data is stored securely and used only for the duration of event needs.</Typography></ListItem>
+                            <ListItem><Typography color="primary" variant="body2">We implement reasonable technical and organizational measures to protect data from unauthorized access, disclosure, or misuse.</Typography></ListItem>
                         </List>
                     </RenderSection>
                     <RenderSection title={"4. Third-Party Services"} idName="third">
                         <>
                             <Typography color="primary" variant="body2">We use third-party services to operate Run4Rights, including: </Typography>
                             <List>
-                                <ListItem><Typography color="primary"><strong>Stripe</strong> — payment processing</Typography></ListItem>
-                                <ListItem><Typography color="primary"><strong>Garmin</strong> — runner activity tracking</Typography></ListItem>
+                                <ListItem><Typography color="primary" variant="body2"><strong>Stripe</strong> — payment processing</Typography></ListItem>
+                                <ListItem><Typography color="primary" variant="body2"><strong>Garmin</strong> — runner activity tracking</Typography></ListItem>
                             </List>
                             <Typography color="primary" variant="body2">These services have their own privacy policies that govern how they handle your information. </Typography>
                         </>
@@ -132,7 +132,13 @@ export default function PrivacyPolicy({
                                 </ReactRouterDomLink>.
                             </Typography>
                             <Typography color="primary" variant="body2" className="text-sm text-neutral-400">
-                                For terms governing use of the site, please see our <a className="underline decoration-white/20 underline-offset-2 hover:decoration-white" href="/terms">Terms of Use</a>.
+                                For terms governing use of the site, please see our {" "}
+                                <ReactRouterDomLink
+                                    to="/terms"
+                                    className="text-primary underline hover:opacity-80"
+                                >
+                                    Terms & Conditions
+                                </ReactRouterDomLink>.
                             </Typography>
                         </>
                     </RenderSection>
