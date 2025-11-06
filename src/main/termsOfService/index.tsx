@@ -2,7 +2,7 @@ import { Box, Link, List, ListItem, Typography } from "@mui/material";
 import { ReactElement } from "react";
 import { Link as ReactRouterDomLink } from "react-router-dom";
 
-export default function PrivacyPolicy({
+export default function TermsOfService({
   lastUpdated = "November 4, 2025",
 }: {
   lastUpdated?: string;
@@ -141,3 +141,102 @@ export default function PrivacyPolicy({
         </div>
     );
 }
+
+
+
+/**
+Terms & Conditions
+
+Last Updated: November 2025
+
+Welcome to Run4Rights (“we,” “our,” or “us”). These Terms & Conditions (“Terms”) govern your access to and use of the Run4Rights website, platform, services, and any related features (collectively, the “Service”). By using or accessing Run4Rights, you agree to be legally bound by these Terms.
+
+If you do not agree with these Terms, you may not use Run4Rights.
+
+1. Purpose of the Service
+
+Run4Rights hosts fundraising events where participants donate to charitable organizations. Donations made through our platform support rotating nonprofit partners. Runner activity may contribute to event milestones, goals, or impact-based achievements.
+
+2. Donations & Payment Processing
+
+All donations are processed by third-party payment provider Stripe.
+Run4Rights does not store donor payment information (credit card details, banking information, or billing addresses). All payment data is subject to Stripe’s Terms and Privacy Policy.
+
+Donations are generally non-refundable.
+If you believe a donation was made in error, you must contact us within 7 days of the transaction and we will review the request.
+
+3. Runner Accounts & Activity Data
+
+If you register as a runner, you may connect third-party services (such as Garmin) to track activity data.
+You are responsible for ensuring your information is accurate and that you have the necessary rights to authorize access to connected accounts.
+
+Run4Rights stores only the minimum necessary information to operate event features (e.g., your name and secure connection information used to link activity data). Removing access to your connected accounts may disable certain features.
+
+4. Acceptable Use
+
+By using the Service, you agree that you will not:
+
+misuse or interfere with platform operations
+
+attempt to harm, scrape, exploit, reverse engineer, or access data that does not belong to you
+
+use the Service for fraudulent, hateful, illegal, or abusive conduct
+
+attempt to bypass security, validation, or access controls
+
+We reserve the right to suspend or terminate accounts or access for behavior that violates these Terms, or if we believe platform integrity is at risk.
+
+5. Intellectual Property
+
+All content, branding, graphics, design, trademarks, features, and functionality provided by Run4Rights are owned by Run4Rights or used with permission.
+You may not copy, modify, sell, republish, or redistribute any part of the Service without written authorization.
+
+6. Third-Party Links & Services
+
+Run4Rights may contain links or integrations to third-party services (including Garmin, social login providers, nonprofit partner websites, and Stripe). These third parties are governed by their own terms and policies.
+Run4Rights is not responsible for third-party content, privacy practices, or policies.
+
+7. Disclaimers
+
+Run4Rights provides the Service “as is” and “as available.”
+We do not guarantee that:
+
+the Service will be uninterrupted or error-free
+
+third-party integrations will always function as expected
+
+data or metrics displayed on the site (including donations or miles) will be perfectly accurate at all times
+
+Nonprofits featured on the platform are independent organizations. Run4Rights is not responsible for their operations, usage of funds, or outcomes.
+
+8. Limitation of Liability
+
+To the maximum extent permitted by law, Run4Rights is not liable for any indirect, incidental, special, consequential, or punitive damages, nor any loss of data, use, revenue, goodwill, or profits arising from your use of the Service.
+
+In no event will Run4Rights’ total liability exceed the amount you donated directly to Run4Rights through the platform (if applicable), or one hundred U.S. dollars (USD $100), whichever is greater.
+
+9. Indemnification
+
+You agree to defend, indemnify, and hold harmless Run4Rights from and against any claims, damages, liabilities, losses, and expenses (including legal fees) arising from:
+
+your use or misuse of the Service
+
+your violation of these Terms
+
+your violation of any rights of a third party
+
+10. Changes to These Terms
+
+We may update, revise, or modify these Terms at any time.
+Any changes will be posted on this page with the updated date. Your continued use of the Service after changes means you accept the revised Terms.
+
+11. Governing Law
+
+These Terms are governed by and interpreted according to the laws of the United States and the State of Colorado (or the user’s local equivalent jurisdiction if required by law).
+
+12. Contact Us
+
+If you have questions about these Terms, please contact us at:
+
+Email: contact@run4rights.org
+ */

@@ -29,6 +29,10 @@ const router = createBrowserRouter([
           Component: Routes.PrivacyPolicy,
         },
         {
+          path: "/terms",
+          Component: Routes.TermsOfService,
+        },
+        {
           path: "*",
           Component: Routes.ErrorPage,
         }

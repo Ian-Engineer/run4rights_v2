@@ -110,8 +110,8 @@ function ContactPage() {
           </Typography>
         </div>
       </div>
-      <div className="max-w-96 flex flex-row justify-center grow items-center ml-8 mr-8" id='right-side'>
-        <div className="w-full flex justify-center items-center">
+      <div className="flex flex-row justify-center grow items-center ml-8 mr-8" id='right-side'>
+        <div className="max-w-96 flex grow justify-center items-center">
             <Box className="p-4 flex flex-col gap-4 w-full overflow-hidden">
               <Typography className="block sm:hidden" fontWeight={600} variant="h4" color="primary">
                 {header}
