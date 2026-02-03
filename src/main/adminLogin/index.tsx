@@ -15,7 +15,6 @@ function AdminLogin() {
     // make api call to login
     api.postRequest('/admin/login', {password: password}).then(async (res) => {
       if (res.success) {
-        console.log(refreshAuth)
         // redirect to admin dashboard
         await refreshAuth()
         navigate('/admin/dashboard');
