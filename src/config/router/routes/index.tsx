@@ -7,6 +7,9 @@ import EventPage from "main/event";
 import ErrorPage from "main/404";
 import PrivacyPolicy from "main/privacyPolicy";
 import TermsOfService from "main/termsOfService";
+import AdminLogin from "main/adminLogin";
+import AdminDashboard from "main/adminDashboard";
+import AdminRoute from "config/auth/AdminRoute";
 
 export default {
     Root,
@@ -17,5 +20,8 @@ export default {
     EventPage,
     ErrorPage,
     PrivacyPolicy,
-    TermsOfService
+    TermsOfService,
+    AdminLogin,
+    AdminDashboard,
+    AdminRoute,
 }

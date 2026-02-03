@@ -33,6 +33,19 @@ const router = createBrowserRouter([
           Component: Routes.TermsOfService,
         },
         {
+          path: "/admin",
+          Component: Routes.AdminLogin,
+        },
+        {
+          element: <Routes.AdminRoute />,
+          children: [
+            {
+              path: "/admin/dashboard",
+              Component: Routes.AdminDashboard,
+            }
+          ]
+        },
+        {
           path: "*",
           Component: Routes.ErrorPage,
         }
