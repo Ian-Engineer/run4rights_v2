@@ -42,6 +42,14 @@ const router = createBrowserRouter([
             {
               path: "/admin/dashboard",
               Component: Routes.AdminDashboard,
+            },
+            {
+              path: "/admin/modify-event",
+              Component: Routes.ModifyEventSection,
+            },
+            {
+              path: "/admin/modify-event/:id",
+              Component: Routes.ModifyEvent,
             }
           ]
         },

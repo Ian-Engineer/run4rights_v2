@@ -15,5 +15,3 @@ export function Footer() {
         </div>
     )
 }
-
-Footer;

@@ -10,6 +10,8 @@ import TermsOfService from "main/termsOfService";
 import AdminLogin from "main/adminLogin";
 import AdminDashboard from "main/adminDashboard";
 import AdminRoute from "config/auth/AdminRoute";
+import ModifyEventSection from "main/modifyEventSelection";
+import ModifyEvent from "main/modifyEvent";
 
 export default {
     Root,
@@ -24,4 +26,6 @@ export default {
     AdminLogin,
     AdminDashboard,
     AdminRoute,
+    ModifyEventSection,
+    ModifyEvent,
 }

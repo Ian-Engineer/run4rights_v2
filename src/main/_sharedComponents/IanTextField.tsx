@@ -12,6 +12,8 @@ export function Run4RightsTextField(
         color = 'secondary',
         error = null,
         size = 'small',
+        autoComplete = 'off',
+        type = 'text',
     }: {
         value: string,
         valueChange: Function,
@@ -22,7 +24,9 @@ export function Run4RightsTextField(
         rows?: number,
         color?: 'primary' | 'secondary' | 'error' | 'warning' | "info" | "success",
         error?: string | null,
-        size?: "small" | "medium"
+        size?: "small" | "medium",
+        autoComplete?: string,
+        type?: string,
     }
 ) {
     return (
@@ -38,6 +42,8 @@ export function Run4RightsTextField(
                 value={value}
                 error={Boolean(error)}
                 onChange={(e)=>{valueChange(e.target.value)}}
+                autoComplete={autoComplete}
+                type={type}
             />
             <div>
                 <Collapse in={Boolean(error)} timeout="auto" unmountOnExit>

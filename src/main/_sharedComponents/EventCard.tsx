@@ -5,6 +5,7 @@ import { Event } from "models";
 import { Run4RightsPaper } from "./IanPaper";
 import { useNavigate } from "react-router-dom";
 import { Run4RightsButton } from "./Run4RightsButton";
+import router from "config/router";
 
     const dimensions: any = {
         small: {
@@ -51,6 +52,7 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
     const [imageError, setImageError] = useState(false)
     const [loaded, setLoaded] = useState(true);
     const navigate = useNavigate();
+    const fromAdmin = location.pathname.startsWith("/admin/modify-event");
 
     function formatToDollars(amount: number): string {
         const USDollar = new Intl.NumberFormat('en-US', {
@@ -79,7 +81,7 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
                     null
                 }
                 <div className="flex flex-row justify-between items-center">
-                    <Run4RightsButton text={"See More"} onClick={handleClick}/>
+                    <Run4RightsButton text={fromAdmin ? "Modify" : "See More"} onClick={handleClick}/>
                     {future ? 
                         null 
                     :
@@ -126,6 +128,10 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
     }
 
     const handleClick = () => {
+        if (fromAdmin) {
+            navigate(`/admin/modify-event/${event.id}`);
+            return;
+        }
         navigate(`/event/${event.id}`)
     }
 

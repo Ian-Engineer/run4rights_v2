@@ -40,6 +40,14 @@ const darkThemeOptions: ThemeOptions = {
                 root: ({ theme }) => ({
                     '& .MuiOutlinedInput-notchedOutline': {
                         borderColor: theme.palette.textField.border,
+                        borderWidth: 2,
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                        borderWidth: 2,
+                    },
+
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                        borderWidth: 3,   // ← even thicker when focused
                     },
                 }),
             },
