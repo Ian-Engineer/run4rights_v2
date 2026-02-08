@@ -7,7 +7,7 @@ const isLocalHost = Boolean(
 );
 
 let config = {
-  endpoint: isLocalHost ? "http://localhost:4000" : "https://actual-domain-name.com",
+  endpoint: isLocalHost ? "http://localhost:4000" : "https://api.run4rights.com",
   version: "0.1.0",
   isUnderMaintenance: false,
   maintenanceMessage: "",

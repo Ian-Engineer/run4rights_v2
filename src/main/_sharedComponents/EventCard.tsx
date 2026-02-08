@@ -2,10 +2,10 @@ import { Box, Typography, Grow } from "@mui/material"
 import { Person } from "@mui/icons-material";
 import { ReactNode, useEffect, useState } from "react";
 import { Event } from "models";
-import { Run4RightsPaper } from "./IanPaper";
 import { useNavigate } from "react-router-dom";
 import { Run4RightsButton } from "./Run4RightsButton";
-import router from "config/router";
+import { RenderDate } from "./DateBox";
+import { TypographyVariant } from "@mui/material/styles";
 
     const dimensions: any = {
         small: {
@@ -49,8 +49,6 @@ import router from "config/router";
     }
 
 const EventCard = ({event, size = 'medium', future = false}: {event: Event, size?: string, future?: boolean}) => {
-    const [imageError, setImageError] = useState(false)
-    const [loaded, setLoaded] = useState(true);
     const navigate = useNavigate();
     const fromAdmin = location.pathname.startsWith("/admin/modify-event");
 
@@ -94,39 +92,6 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
         )
     }
 
-    function formatCustomDate(date: Date) {
-        const months = [
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        ];
-
-        const month = months[date.getMonth()];
-        const day = date.getDate();
-
-        return {month, day};
-    }
-
-    const RenderDate = ({event, size}: {event: Event, size: string}): ReactNode => {
-        let date = formatCustomDate(new Date(event.eventDate));
-        return (
-            <Box 
-                sx={{
-                    backgroundColor: "secondary.main", 
-                    borderRadius: dimensions[size].borderRadius, 
-                    margin: "10px", 
-                    padding: "10px", 
-                    textAlign: "center", 
-                    display: "flex", 
-                    alignItems: "center"
-                }}
-                className='flex flex-col align-center justify-center text-center max-h-fit'
-            >
-                <Typography fontWeight={700} variant={dimensions[size].dateSize}>{date.month}</Typography>
-                <Typography fontWeight={700} variant={dimensions[size].dateSize}>{date.day}</Typography>
-            </Box>
-        )
-    }
-
     const handleClick = () => {
         if (fromAdmin) {
             navigate(`/admin/modify-event/${event.id}`);
@@ -137,7 +102,7 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
 
     return (
         <div className="flex flex-row gap-6 items-center">
-            <RenderDate event={event} size={size}/>
+            <RenderDate eventDate={new Date(event.eventDate)} dateSize={dimensions[size].dateSize as TypographyVariant} borderRadius={dimensions[size].borderRadius}/>
             <RenderText event={event} size={size}/>
         </div>
     )

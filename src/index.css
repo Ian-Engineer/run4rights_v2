@@ -5,6 +5,11 @@
   font-style: normal;
 }
 
+@font-face {
+  src: url('./assets/fonts/lazy_dog.ttf') format('truetype');
+  font-family: 'Lazy Dog';
+}
+
 html, body {
   overscroll-behavior: none;
 }
