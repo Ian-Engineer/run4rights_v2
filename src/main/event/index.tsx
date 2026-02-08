@@ -43,7 +43,7 @@ function EventPage() {
         <div className='w-full h-full flex grow justify-center items-center'>
           <CircularProgress size={"5rem"} />
         </div>      
-      ) : error ? (
+      ) : !error ? (
         <div className="flex sm:flex-row flex-col">
           <div id="left-side" className="w-full sm:w-3/5 text-left flex flex-col gap-8 mt-4 mb-4">
             <Box sx={{bgcolor: 'primary.main'}} className='w-full flex flex-row h-fit p-4'>
@@ -98,7 +98,9 @@ function EventPage() {
                     <Typography variant='body1' fontWeight={500} color='primary'>{event.description}</Typography>
                   </div>
                 </div>
-              ) : (null)}
+              ) : (
+                <Typography color="primary">Error loading event info.</Typography>
+              )}
             </div>
           </div>
           <div id="right-side" className='p-4'>
