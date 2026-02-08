@@ -1,7 +1,6 @@
-import { Box, AppBar, Toolbar, IconButton, useTheme, Typography, Tooltip } from "@mui/material";
+import { Box, AppBar, Toolbar, IconButton, Typography, Tooltip } from "@mui/material";
 import { CalendarMonth, Email, Home } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
-import DarkModeSwitch from './DarkModeSwitch'
 
 function NavBar() {
     const navigate = useNavigate();

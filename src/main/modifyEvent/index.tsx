@@ -65,13 +65,13 @@ const handleDateUpdate = (
             valueChange={(val: string) => handleTextUpdates("organization", val)}
             className='w-full'
           /> 
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
             <AppDatePicker 
               label="Event Date"
               value={event?.eventDate}
               onChange={(newValue) => handleDateUpdate("eventDate", newValue)}
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
         </div>
       )}
     </div>

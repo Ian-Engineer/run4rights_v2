@@ -17,7 +17,7 @@ function ModifyEventSelection() {
       } else {
         setError(res.message);
       }
-    }).catch(error => {
+    }).catch(() => {
       setError("Error getting events list.");
     }).finally(()=>{
       setLoading(false);
