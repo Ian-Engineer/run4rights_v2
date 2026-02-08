@@ -1,5 +1,5 @@
-import { Box, Button, Divider, Paper, Typography } from "@mui/material";
-import { Run4RightsButton, Run4RightsPaper, Footer } from "main/_sharedComponents";
+import { Box, Paper, Typography } from "@mui/material";
+import { Run4RightsButton, Footer } from "main/_sharedComponents";
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {

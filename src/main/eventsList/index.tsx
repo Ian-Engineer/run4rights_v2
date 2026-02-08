@@ -1,11 +1,8 @@
-import { ReactComponentElement, ReactElement, useEffect, useState } from 'react'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import { Box, Collapse, Divider, Typography } from '@mui/material'
 import { ApiResponse, EventsSorted, Event } from 'models';
 import EventCard from 'main/_sharedComponents/EventCard';
 import api from "../../api"
-import { Footer } from 'main/_sharedComponents';
 import React from 'react';
 
 function EventsPage() {

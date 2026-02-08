@@ -1,6 +1,4 @@
-import { Box, Typography, Grow } from "@mui/material"
-import { Person } from "@mui/icons-material";
-import { ReactNode, useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material"
 import { Event } from "models";
 import { useNavigate } from "react-router-dom";
 import { Run4RightsButton } from "./Run4RightsButton";

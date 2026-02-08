@@ -1,5 +1,5 @@
-import { Box, Button, Collapse, Typography } from "@mui/material"
-import { Run4RightsButton, Run4RightsPaper, Run4RightsTextField } from "sharedComponents"
+import { Box, Collapse, Typography } from "@mui/material"
+import { Run4RightsButton, Run4RightsTextField } from "sharedComponents"
 import { useState } from "react"
 import emailjs from 'emailjs-com';
 

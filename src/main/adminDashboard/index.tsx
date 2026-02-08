@@ -1,12 +1,8 @@
-import { useState } from 'react'
-import { Run4RightsButton, Run4RightsTextField } from 'main/_sharedComponents'
+import { Run4RightsButton } from 'main/_sharedComponents'
 import { Box, Typography } from '@mui/material'
-import api from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 function AdminDashboard() {
-  const [password, setPassword] = useState<string>("")
-  const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate();
 

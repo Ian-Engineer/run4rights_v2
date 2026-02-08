@@ -25,11 +25,11 @@ export const ThemeModeProvider = ({ children }:{ children: React.ReactNode }) =>
     const getInitialMode = (): ColorMode => {
         return 'light'
 
-        const saved = localStorage.getItem(localStorageColorModeKey) as ColorMode | null;
-        if (saved === 'light' || saved === 'dark') return saved;
+        // const saved = localStorage.getItem(localStorageColorModeKey) as ColorMode | null;
+        // if (saved === 'light' || saved === 'dark') return saved;
         
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        return systemPrefersDark ? 'dark' : 'light';
+        // const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // return systemPrefersDark ? 'dark' : 'light';
     };
     
     const [mode, setMode] = useState<ColorMode>(getInitialMode);

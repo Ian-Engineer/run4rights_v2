@@ -1,6 +1,6 @@
 import { createTheme, ThemeOptions } from '@mui/material/styles'
 import baseThemeOptions from './baseTheme';
-import { grey, red } from '@mui/material/colors'
+import { red } from '@mui/material/colors'
 
 const tenPercent: string = "#402d28";
 const thirtyPercent: string = "#b65636";

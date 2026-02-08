@@ -7,7 +7,6 @@ import { ApiResponse, Event } from 'models';
 import utils from '../../utils';
 
 function EventPage() {
-  const [count, setCount] = useState(0)
   const [loading, setLoading] = useState<boolean>(true);
   const [event, setEvent] = useState<Event>();
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +29,7 @@ function EventPage() {
           setMapUrl(mapsUrl);
         }
       }
-    }).catch((error) => {
+    }).catch(() => {
       // handle error
       setError("Error loading event details.");
     }).finally(() => {
@@ -44,7 +43,7 @@ function EventPage() {
         <div className='w-full h-full flex grow justify-center items-center'>
           <CircularProgress size={"5rem"} />
         </div>      
-      ) : (
+      ) : error ? (
         <div className="flex sm:flex-row flex-col">
           <div id="left-side" className="w-full sm:w-3/5 text-left flex flex-col gap-8 mt-4 mb-4">
             <Box sx={{bgcolor: 'primary.main'}} className='w-full flex flex-row h-fit p-4'>
@@ -110,7 +109,8 @@ function EventPage() {
             ) : null}
           </div>
         </div>
-      )}
+      ) : null
+      }
     </div>
   )
 }

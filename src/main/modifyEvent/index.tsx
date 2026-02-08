@@ -3,11 +3,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import api from '../../api';
 import { CircularProgress, Divider, Typography } from '@mui/material';
-import { AppDatePicker, Run4RightsTextField } from 'main/_sharedComponents';
+import { Run4RightsTextField } from 'main/_sharedComponents';
 import { Event } from 'models';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from "dayjs";
 
 
 function ModifyEvent() {
@@ -37,17 +34,17 @@ function ModifyEvent() {
     setEvent({...event, [field]: value} as Event)
   }
 
-const handleDateUpdate = (
-  field: keyof Event,
-  value: string | null
-) => {
-  if (!value) return;
+// const handleDateUpdate = (
+//   field: keyof Event,
+//   value: string | null
+// ) => {
+//   if (!value) return;
 
-  setEvent(prev => ({
-    ...prev!,
-    [field]: value.toString()
-  }));
-};
+//   setEvent(prev => ({
+//     ...prev!,
+//     [field]: value.toString()
+//   }));
+// };
 
   return (
     <div className="flex flex-col w-full h-fit min-h-full p-4 align-center items-center">
@@ -57,23 +54,27 @@ const handleDateUpdate = (
         <div className='w-full h-full flex grow justify-center items-center'>
           <CircularProgress size={"5rem"} />
         </div>
-      ) : (
-        <div className="flex flex-col gap-6 p-4 w-full">
-          <Run4RightsTextField
-            label="Organization Name"
-            value={event?.organization || ""}
-            valueChange={(val: string) => handleTextUpdates("organization", val)}
-            className='w-full'
-          /> 
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <AppDatePicker 
-              label="Event Date"
-              value={event?.eventDate}
-              onChange={(newValue) => handleDateUpdate("eventDate", newValue)}
-            />
-          </LocalizationProvider> */}
-        </div>
-      )}
+      ) : 
+        error ? (
+          <div className="flex flex-col gap-6 p-4 w-full">
+            <Run4RightsTextField
+              label="Organization Name"
+              value={event?.organization || ""}
+              valueChange={(val: string) => handleTextUpdates("organization", val)}
+              className='w-full'
+            /> 
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <AppDatePicker 
+                label="Event Date"
+                value={event?.eventDate}
+                onChange={(newValue) => handleDateUpdate("eventDate", newValue)}
+              />
+            </LocalizationProvider> */}
+          </div>
+        )
+        : 
+        null
+      }
     </div>
   )
 }

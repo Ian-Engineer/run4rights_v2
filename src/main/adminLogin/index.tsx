@@ -22,7 +22,7 @@ function AdminLogin() {
       } else {
         setError(res.message)
       }
-    }).catch((err) => {
+    }).catch(() => {
       setError("Error connecting to the server, please try again.")
     })
   };
