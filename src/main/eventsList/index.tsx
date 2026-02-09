@@ -11,8 +11,7 @@ function EventsPage() {
   const [activeEvent, setActiveEvents] = useState<Event | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error ,setError] = useState<boolean>(false);
-
-  let errorMessage = "";
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   useEffect(()=>{
     if (loading) api.getRequest("/events/sorted")
@@ -23,12 +22,12 @@ function EventsPage() {
           setActiveEvents(response.data.active || null);
         } else {
           setError(true)
-          errorMessage = response.message
+          setErrorMessage(response.message)
         }
       })
       .catch(error => {
         console.log(error)
-        errorMessage = error
+        setErrorMessage(error)
         setError(true)
       })
       .finally(()=>{
