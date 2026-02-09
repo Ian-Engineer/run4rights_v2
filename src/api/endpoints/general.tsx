@@ -24,12 +24,18 @@ const getRequest = async (endpoint: string): Promise<ApiResponse<any>> => {
       data: [],
       message: res.message,
     };
-  } catch (err: any) {
-    console.log(err);
+  } catch (error: any) {
+    let errorMessage: string = "";
+    if (error instanceof TypeError) {
+      errorMessage =  error.message;
+    } else {
+      // Handle other potential errors if needed
+      errorMessage = error;
+    }
     return {
       success: false,
       data: [],
-      message: err,
+      message: errorMessage,
     };
   }
 };
