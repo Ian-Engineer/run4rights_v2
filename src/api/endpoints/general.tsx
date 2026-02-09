@@ -24,12 +24,12 @@ const getRequest = async (endpoint: string): Promise<ApiResponse<any>> => {
       data: [],
       message: res.message,
     };
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     return {
       success: false,
       data: [],
-      message: "Error connecting to the server, please try again.",
+      message: err,
     };
   }
 };
