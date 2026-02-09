@@ -23,7 +23,7 @@ function Root() {
         <div className="h-[100dvh] w-screen">
             <div className="h-full w-full flex flex-col-reverse bottom-0 sm:flex-col">
                 <NavBar />
-                <div className="flex-grow flex overflow-y-auto w-full justify-center z-10">
+                <div className="flex-grow flex overflow-hidden w-full justify-center z-10">
                     <Outlet />
                 </div>
             </div>
