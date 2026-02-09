@@ -12,6 +12,8 @@ function EventsPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error ,setError] = useState<boolean>(false);
 
+  let errorMessage = "";
+
   useEffect(()=>{
     if (loading) api.getRequest("/events/sorted")
       .then((response: ApiResponse<EventsSorted>) => {
@@ -21,10 +23,12 @@ function EventsPage() {
           setActiveEvents(response.data.active || null);
         } else {
           setError(true)
+          errorMessage = response.message
         }
       })
       .catch(error => {
         console.log(error)
+        errorMessage = error
         setError(true)
       })
       .finally(()=>{
@@ -71,7 +75,7 @@ function EventsPage() {
                   <EventCard event={event} future={true} key={`eventCardFor:${event.organization}-on-${event.eventDate}`}/>
                 )
                   :
-                <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : "Currently, there are no upcoming events scheduled."}</Typography>
+                <Typography color={error ? 'error' : 'primary'}>{error ? errorMessage : "Currently, there are no upcoming events scheduled."}</Typography>
               }
             </div>
           </SectionRender>

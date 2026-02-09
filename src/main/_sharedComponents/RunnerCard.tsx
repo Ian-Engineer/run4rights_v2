@@ -1,128 +1,80 @@
-// import { Box, Typography, Grow } from "@mui/material"
-// import { Person } from "@mui/icons-material";
-// import { useEffect, useState } from "react";
+import { Runner } from "models"; 
 
-//     const dimensions = {
-//         small: {
-//             header: 'h4',
-//             body: 'body3',
-//             roleIcon: 'xs',
-//             imageSize: '60px',
-//             imageTranslate: 'translatex(-12px)',
-//             backupImage: 'medium',
-//             imagePlaceholder: '50px',
-//             backupImagePlaceholder: '30px',
-//         },
-//         medium: {
-//             header: 'h3',
-//             body: 'body2',
-//             roleIcon: 'small',
-//             imageSize: '72px',
-//             imageTranslate: 'translatex(-15px)',
-//             backupImage: 'large',
-//             imagePlaceholder: '57px',
-//             backupImagePlaceholder: '36px',
-//         },
-//         large: {
+type RunnerCardProps = {
+  runner: Runner;
+  onClick?: () => void;
+};
 
-//         },
-//         xl: {
-//             header: 'h3',
-//             body: 'body2',
-//             roleIcon: 'xl',
-//             imageSize: '96px',
-//             imageTranslate: 'translatex(-5px)',
-//             backupImage: 'large',
-//             imagePlaceholder: '114px',
-//             backupImagePlaceholder: '72px',
-//             textTranslate: 'translatex(80px)',
-//         }
-//     }
+export function RunnerCard({ runner, onClick }: RunnerCardProps) {
+  return (
+    <div
+      onClick={onClick}
+      className="
+        group cursor-pointer
+        bg-white rounded-2xl
+        shadow-sm hover:shadow-lg
+        transition-all duration-200
+        border border-gray-100
+        p-4
+      "
+    >
+      <div className="flex gap-4">
+        {/* Photo */}
+        <img
+          src={runner.photo}
+          alt={runner.name}
+          className="
+            w-20 h-20
+            rounded-xl
+            object-cover
+            shrink-0
+          "
+        />
 
-// const RunnerCard = ({runner, size = 'xl'}: {runner: any, size: "small" | "medium" | "large" | "xl"}) => {
-//     const [imageError, setImageError] = useState(false)
-//     const [loaded, setLoaded] = useState(false);
-    
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          {/* Header row */}
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="text-lg font-semibold text-gray-900 truncate">
+              {runner.name}
+            </h3>
 
-//     const renderText = (runner: any, size:  "small" | "medium" | "large" | "xl") => {
-//         return (
-//             <>
-//                 <Typography className='text-left' fontWeight={'bold'} variant={dimensions[size].header} color={'background.default'}>
-//                     {runner.name}
-//                 </Typography>
-//                 <Box
-//                     sx={{
-//                         color: theme.palette.dark_brown
-//                     }}
-//                     className='flex flex-col w-full gap-2 justify-around'
-//                 >
-//                     <Typography variant={dimensions[size].body}>
-//                         {runner.description}
-//                     </Typography>
-//                     <Typography variant={dimensions[size].body} fontWeight={'bold'} className="text-right">
-//                         Mileage: {runner.mileage}
-//                     </Typography>
-//                 </Box>
-//             </>
-//         )
-//     }
+            <span
+              className="
+                bg-emerald-100 text-emerald-700
+                text-sm font-semibold
+                px-3 py-1
+                rounded-full
+                whitespace-nowrap
+              "
+            >
+              {runner.miles} mi
+            </span>
+          </div>
 
-//     const renderImage = (runner, size) => {
-//         return ( 
-//             <>
-//                 <div className="w-2/5">
-//                     <img
-//                         // className="absolute" 
-//                         src={`/runners/${runner.image}`}
-//                         alt='u' 
-//                         style={{
-//                             // top: "-15px",
-//                             // transform: dimensions[size].imageTranslate, 
-//                             height: dimensions[size].imageSize, 
-//                             width: dimensions[size].imageSize
-//                         }}
-//                         onError={()=>setImageError(true)}
-//                     />
-//                     <div style={{width: dimensions[size].imagePlaceholder}}/>
-//                 </div>
-//                 <div className="flex flex-col">
-//                     <div>
-//                         {renderText(runner, size)}
-//                     </div>
-//                 </div>
-//             </>
-//         )
-//     }
+          {/* Description */}
+          <p
+            className="
+              text-sm text-gray-600
+              mt-1
+              line-clamp-3
+            "
+          >
+            {runner.description}
+          </p>
+        </div>
+      </div>
 
-//     useEffect(()=>{
-//         const img = new Image();
-//         img.src = `/runners/${runner.image}`
-
-//         img.onload = () => {
-//             setImageError(false);
-//             setLoaded(true);
-//         }
-
-//         img.onerror = () => {
-//             setImageError(true);
-//             setLoaded(true);
-//         }
-//     }, [])
-
-//     return (
-//         <Grow in={loaded} timeout={500}>
-//             <Box
-//                 sx={{
-//                     backgroundColor: theme.palette.beige,
-//                     padding: '5px',
-//                     borderRadius: `${theme.shape.borderRadius}px`,
-//                 }}
-//                 className={`flex flex-row items-center w-full min-w-fit relative`}
-//             >
-//                 {renderImage(runner, size)}
-//             </Box>
-//         </Grow>
-//     )
-// }
-
-// export default RunnerCard
+      {/* subtle hover bar */}
+      <div
+        className="
+          mt-4 h-1 w-0
+          bg-emerald-400
+          rounded-full
+          transition-all duration-200
+          group-hover:w-full
+        "
+      />
+    </div>
+  );
+}
