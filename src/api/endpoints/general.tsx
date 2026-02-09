@@ -27,7 +27,7 @@ const getRequest = async (endpoint: string): Promise<ApiResponse<any>> => {
   } catch (error: any) {
     let errorMessage: string = "";
     if (error instanceof TypeError) {
-      errorMessage =  JSON.stringify(error);
+      errorMessage =  error.message;
     } else {
       // Handle other potential errors if needed
       errorMessage = error;
