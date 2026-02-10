@@ -2,11 +2,11 @@ import { createTheme, ThemeOptions } from '@mui/material/styles'
 import baseThemeOptions from './baseTheme';
 import { red } from '@mui/material/colors'
 
-const tenPercent: string = "#402d28";
-const thirtyPercent: string = "#b65636";
-const sixtyPercent: string = "#174d4d";
-const pageBackground: string = "#F5DAB1"; //F5DAB1
-const textColor: string = "#F5DAB1" //dfc7a2
+export const tenPercent: string = "#402d28";
+export const thirtyPercent: string = "#b65636";
+export const sixtyPercent: string = "#174d4d";
+export const pageBackground: string = "#F5DAB1"; //F5DAB1
+export const textColor: string = "#F5DAB1" //dfc7a2
 
 const lightThemeOptions: ThemeOptions = {
     ...baseThemeOptions,

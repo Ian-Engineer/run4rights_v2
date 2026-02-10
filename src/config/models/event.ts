@@ -2,7 +2,7 @@ import { Runner } from "./runner";
 
 export interface Event {
     id: string;
-    eventDate: Date;
+    eventDate: string;
     organization: string;
     moneyRaised: number;
     active: boolean;

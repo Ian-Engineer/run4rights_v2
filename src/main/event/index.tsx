@@ -3,8 +3,9 @@ import { PolaroidGallery, RenderDate } from 'main/_sharedComponents';
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import api from '../../api';
-import { ApiResponse, Event } from 'models';
+import { ApiResponse, Event, Runner } from 'models';
 import utils from '../../utils';
+import { RunnerCard } from 'main/_sharedComponents/RunnerCard';
 
 function EventPage() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,7 +39,7 @@ function EventPage() {
   }, [params]);
 
   return (
-    <div className='flex w-full h-full'>
+    <div className='flex w-full h-full pb-4'>
       {loading ? (
         <div className='w-full h-full flex grow justify-center items-center'>
           <CircularProgress size={"5rem"} />
@@ -54,48 +55,74 @@ function EventPage() {
             <div className='flex flex-col sm:items-start items-center'>
               {event?.eventDate ? (
                 <div className='flex flex-col gap-4'>
-                <div className='flex flex-row gap-4'>
-                  <div className="h-min-fit w-min-fit flex justify-center items-center">
-                    <RenderDate eventDate={new Date(event.eventDate)} dateSize="h4" borderRadius="10px" displayYear={true}/>
-                  </div>
-                  <div className='flex flex-col w-fit gap-4'>
-                    <div>
-                      {event.startTime ? (
-                        <Typography variant='h6' fontWeight={700} color="primary.main">
-                          Start: {utils.formatTime(event.startTime, event.timezone)}
-                        </Typography>
-                      ) : null}
-                      {event.endTime ? (
-                        <Typography variant='h6' fontWeight={700} color="primary.main">
-                          End: {utils.formatTime(event.endTime, event.timezone)}
-                        </Typography>
-                      ) : null}
+                  <div className='flex flex-row gap-4'>
+                    <div className="h-min-fit w-min-fit flex justify-center items-center">
+                      <RenderDate eventDate={new Date(event.eventDate)} dateSize="h4" borderRadius="10px" displayYear={true}/>
                     </div>
-                    <a
-                      href={mapUrl || undefined}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
-                    >
+                    <div className='flex flex-col w-fit gap-4'>
                       <div>
-                        <Typography variant="body2" fontWeight={700} color="primary">
-                          {event.locationName}
-                        </Typography>
-
-                        <Typography variant="body2" fontWeight={700} color="primary">
-                          {event.streetAddress}
-                        </Typography>
-
-                        <Typography variant="body2" fontWeight={700} color="primary">
-                          {event.city}, {event.state} {event.zipcode}
-                        </Typography>
+                        {event.startTime ? (
+                          <Typography variant='h6' fontWeight={700} color="primary.main">
+                            Start: {utils.formatTime(event.startTime, event.timezone)}
+                          </Typography>
+                        ) : null}
+                        {event.endTime ? (
+                          <Typography variant='h6' fontWeight={700} color="primary.main">
+                            End: {utils.formatTime(event.endTime, event.timezone)}
+                          </Typography>
+                        ) : null}
                       </div>
-                    </a>
+                      <a
+                        href={mapUrl || undefined}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div>
+                          <Typography variant="body2" fontWeight={700} color="primary">
+                            {event.locationName}
+                          </Typography>
+
+                          <Typography variant="body2" fontWeight={700} color="primary">
+                            {event.streetAddress}
+                          </Typography>
+
+                          <Typography variant="body2" fontWeight={700} color="primary">
+                            {event.city}, {event.state} {event.zipcode}
+                          </Typography>
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
                   <div className='flex flex-col gap-4 p-4'>
-                    <Typography variant='h5' className='hidden sm:block' fontWeight={700} color='primary'>About the Event</Typography>
-                    <Typography variant='body1' fontWeight={500} color='primary'>{event.description}</Typography>
+                    <Typography variant='h5' fontWeight={700} color='primary'>About the Event</Typography>
+                    <Typography 
+                      variant='body1' 
+                      fontWeight={500} 
+                      color='primary'
+                      sx={{ whiteSpace: 'pre-line' }}
+                    >
+                      {event.description}
+                    </Typography>
+                  </div>
+                  <div className='flex flex-col gap-4 p-4'>
+                    <Typography variant='h5' fontWeight={700} color='primary'>The Runners</Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: 4,
+                        justifyContent: "center",
+                        paddingBottom: 4
+                      }}
+                    >
+                      {event.runners !== undefined && event?.runners?.length > 0 ? event?.runners?.map((runner: Runner) => 
+                        <RunnerCard key={`modifyRunnersList-runner:${runner.id}`} runner={runner}/>
+                      )
+                      : (
+                        <Typography variant="h6" color="primary">No runners listed. You can add runners below.</Typography>
+                      )}
+                    </Box>
                   </div>
                 </div>
               ) : (

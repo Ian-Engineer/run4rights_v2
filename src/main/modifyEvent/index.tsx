@@ -1,10 +1,13 @@
 import { ApiResponse, Runner } from 'models';
 import { useEffect, useState } from 'react'
 import api from '../../api';
-import { Breadcrumbs, CircularProgress, Divider, Typography, Link, List, ListItem, ListItemButton, ListItemText, Checkbox, ListItemAvatar, Avatar } from '@mui/material';
-import { Run4RightsTextField } from 'main/_sharedComponents';
+import { Breadcrumbs, CircularProgress, Divider, Typography, Link, List, ListItem, ListItemButton, ListItemText, Checkbox, ListItemAvatar, Avatar, TextField, IconButton } from '@mui/material';
+import { Run4RightsButton, Run4RightsTextField } from 'main/_sharedComponents';
 import { Event } from 'models';
 import { Link as RouterLink, useParams } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { thirtyPercent } from 'config/theme/lightTheme';
 
 interface EventRunner extends Runner {
   inEvent: boolean,
@@ -15,6 +18,8 @@ function ModifyEvent() {
   const [runners, setRunners] = useState<EventRunner[]>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [originalEvent, setOriginalEvent] = useState<Event>();
+  const [originalRunners, setOriginalRunners] = useState<EventRunner[]>();
   const params = useParams();
 
   const fetchEvent = () => {
@@ -23,6 +28,7 @@ function ModifyEvent() {
       // handle response
       if (response.success && response.data) {
         setEvent(response.data);
+        setOriginalEvent(response.data);
         const eventRunners: Runner[] = response.data.runners || [];
         fetchRunners(eventRunners);
       } else {
@@ -41,15 +47,23 @@ function ModifyEvent() {
       if (response.success) {
 
         // build fast lookup set
-        const eventRunnerIds = new Set(eventRunners.map(r => r.id));
+        const eventRunnerMap = new Map(
+          eventRunners.map(r => [r.id, r])
+        );
 
         const inEventRunners: EventRunner[] =
-          response.data.map((runner: Runner): EventRunner => ({
-            ...runner,
-            inEvent: eventRunnerIds.has(runner.id)
-          }));
+          response.data.map((runner: Runner): EventRunner => {
+            const match = eventRunnerMap.get(runner.id);
+
+            return {
+              ...runner,
+              inEvent: !!match,
+              miles: match?.miles ?? undefined
+            };
+          });
 
         setRunners(inEventRunners);
+        setOriginalRunners(inEventRunners);
       } else {
         setError(response.message);
       }
@@ -76,6 +90,42 @@ function ModifyEvent() {
       )
     );
   };
+
+  const handleReset = () => {
+    setEvent(originalEvent);
+    setRunners(originalRunners);
+  }
+
+  const handleSave = () => {
+    api.putRequest(`/events/${event?.id}`,{...event, runners: runners?.filter(runner => runner.inEvent)})
+  }
+
+  const updateMiles = (updatedRunner: EventRunner, miles: string) => {
+    const milesAsNumber = +miles
+    const overwriteIndex = runners?.findIndex(runner => runner.id === updatedRunner.id)
+    if (runners && overwriteIndex !== undefined) {
+      let shallowCopyOfRunners: EventRunner[] = [...runners]
+      setRunners([...shallowCopyOfRunners.slice(0, overwriteIndex), {...updatedRunner, miles: Math.max(0, milesAsNumber)}, ...shallowCopyOfRunners.slice(overwriteIndex + 1)])
+    }
+  }
+
+  const incrementRunnerMilesUp = (updatedRunner: EventRunner) => {
+    const overwriteIndex: number | undefined = runners?.findIndex(runner => runner.id === updatedRunner.id)
+    if (runners && overwriteIndex !== undefined) {
+      let miles = runners[overwriteIndex].miles || 0;
+      let shallowCopyOfRunners: EventRunner[] = [...runners]
+      setRunners([...shallowCopyOfRunners.slice(0, overwriteIndex), {...updatedRunner, miles: miles+1}, ...shallowCopyOfRunners.slice(overwriteIndex + 1)])
+    }
+  }
+
+  const incrementRunnerMilesDown = (updatedRunner: EventRunner) => {
+    const overwriteIndex: number | undefined = runners?.findIndex(runner => runner.id === updatedRunner.id)
+    if (runners && overwriteIndex !== undefined) {
+      let miles = runners[overwriteIndex].miles || 0;
+      let shallowCopyOfRunners: EventRunner[] = [...runners]
+      setRunners([...shallowCopyOfRunners.slice(0, overwriteIndex), {...updatedRunner, miles: Math.max(0, miles-1)}, ...shallowCopyOfRunners.slice(overwriteIndex + 1)])
+    }
+  }
 
 // const handleDateUpdate = (
 //   field: keyof Event,
@@ -118,15 +168,17 @@ function ModifyEvent() {
         </Link>
       </Breadcrumbs>
       <div className="flex flex-col w-full align-center items-center">
-        <Typography color="primary" variant='h4' fontWeight={600} className='p-4'>Modify Event</Typography>
-        <Divider sx={{backgroundColor: "primary.main"}}  className='w-full'/>
+        <div className="flex flex-col w-full text-center pb-4">
+          <Typography color="primary" variant='h4' fontWeight={600} className='p-4'>Modify Event</Typography>
+          <Divider sx={{backgroundColor: "primary.main"}}  className='w-full'/>
+        </div>
         { loading ? (
           <div className='w-full h-full flex grow justify-center items-center'>
             <CircularProgress size={"5rem"} />
           </div>
         ) : 
           !error ? (
-            <div className="flex flex-col gap-6 p-4 w-full">
+            <div className="flex flex-col gap-4 w-full">
               <Run4RightsTextField
                 label="Organization Name"
                 value={event?.organization || ""}
@@ -148,6 +200,7 @@ function ModifyEvent() {
                       sx={{
                         border: 1,
                         borderColor: 'divider',
+                        paddingLeft: "4px",
                       }}
                   >
                       <ListItemAvatar>
@@ -156,9 +209,35 @@ function ModifyEvent() {
                           src={`/images/runners/${runner.name.toLowerCase()}.webp`}
                         />
                       </ListItemAvatar>
-                      <Typography color="primary">
-                        {runner.name}
-                      </Typography>
+                      <div className="flex flex-row w-full justify-between items-center align-center">
+                        <Typography color="primary">
+                          {runner.name}
+                        </Typography>
+                        <div className='flex flex-row align-center'>
+                          <IconButton
+                            size="small"
+                            onClick={() => incrementRunnerMilesDown(runner)}
+                          >
+                            <RemoveIcon sx={{color:thirtyPercent}} />
+                          </IconButton>
+                          <TextField 
+                            sx={{width: "60px"}} 
+                            onChange={(e) => updateMiles(runner, e.target.value)} 
+                            type="number" 
+                            label="Miles" 
+                            size='small' 
+                            value={runner.miles || ""} 
+                            inputProps={{ min: 0 }}
+                            InputLabelProps={{ shrink: true }}  
+                          />
+                          <IconButton
+                            size="small"
+                            onClick={() => incrementRunnerMilesUp(runner)}
+                          >
+                            <AddIcon sx={{color:thirtyPercent}} />
+                          </IconButton>
+                        </div>
+                      </div>
                   </ListItem>
                 )}
               </List>
@@ -169,6 +248,16 @@ function ModifyEvent() {
                   onChange={(newValue) => handleDateUpdate("eventDate", newValue)}
                 />
               </LocalizationProvider> */}
+              <div className="flex flex-row justify-evenly p-4">
+                <Run4RightsButton 
+                  text="Save"
+                  onClick={handleSave}
+                />
+                <Run4RightsButton 
+                  text="Reset"
+                  onClick={handleReset}
+                />
+              </div>
             </div>
           )
           : 

@@ -97,7 +97,7 @@ function UpdateRunners() {
                   justifyContent: "center",
                 }}
               >
-                <CreateRunnerModal handleClose={handleCloseCreateRunner} open={openUpdateRunner} update={{name: runnerUpdate?.name || "", description: runnerUpdate?.description || "", id: runnerUpdate?.id || ""}}/>
+                <CreateRunnerModal handleClose={handleCloseCreateRunner} open={openUpdateRunner} update={{name: runnerUpdate?.name || "", description: runnerUpdate?.description || "", id: runnerUpdate?.id || 0}}/>
                   {runnerList.length > 0 ? runnerList.map((runner: Runner) => 
                       <RunnerCard key={`modifyRunnersList-runner:${runner.id}`} runner={runner}  onClick={() => handleUpdateRunner(runner)}/>
                     )

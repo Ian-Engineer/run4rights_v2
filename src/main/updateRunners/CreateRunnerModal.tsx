@@ -6,32 +6,38 @@ import { ApiResponse, Runner } from "models";
 
 type FieldKey = 'name' | 'description' | 'id';
 
-const initialValues: Record<FieldKey, string> = {
+interface Input {
+    name: string | null,
+    description: string | null,
+    id: number | null
+}
+
+const initialValues: Input = {
   name: '',
   description: '',
-  id: "",
+  id: null,
 };
 
-const initialErrors: Record<FieldKey, string | null> = {
+const initialErrors: Input = {
   name: null,
   description: null,
   id: null
 };
 
-export default function CreateRunnerModal({open, handleClose, update = null}: {open: boolean, handleClose: Function, update?: Record<FieldKey, string> | null }) {
+export default function CreateRunnerModal({open, handleClose, update = null}: {open: boolean, handleClose: Function, update?: Input | null }) {
     const [ submitError, setSubmitError ] = useState<string | null>(null);
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState(initialErrors);
 
     const handleSubmit = () => {
         let hasError = false;
-        const newErrors: Record<FieldKey, string | null> = { ...initialErrors };
+        const newErrors: Input = { ...initialErrors };
     
-        if (!formValues.name.trim()) {
+        if (!formValues.name?.trim()) {
             newErrors.name = 'Required';
             hasError = true;
         }
-        if (!formValues.description.trim()) {
+        if (!formValues.description?.trim()) {
             newErrors.description = 'Required';
             hasError = true;
         }
@@ -95,7 +101,7 @@ export default function CreateRunnerModal({open, handleClose, update = null}: {o
                     <Run4RightsTextField 
                         label="Name" 
                         className="" 
-                        value={formValues.name} 
+                        value={formValues.name || ""} 
                         valueChange={(val: string) => {handleChange("name", val)}} 
                         error={formErrors.name}
                     />
@@ -104,7 +110,7 @@ export default function CreateRunnerModal({open, handleClose, update = null}: {o
                         rows={4} 
                         label="Description" 
                         className="" 
-                        value={formValues.description} 
+                        value={formValues.description || ""} 
                         valueChange={(val: string) => {handleChange("description", val)}} 
                         error={formErrors.description}
                     />

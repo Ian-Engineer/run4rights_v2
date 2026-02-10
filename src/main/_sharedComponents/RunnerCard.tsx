@@ -31,7 +31,7 @@ export function RunnerCard({ runner, onClick }: RunnerCardProps) {
           relative z-10
           bg-[#fdfcf7]
           p-1.5 pb-0
-          w-[110px]
+          w-[70px]
           shrink-0
           shadow-[0_8px_18px_rgba(0,0,0,0.25)]
           transition-transform duration-200

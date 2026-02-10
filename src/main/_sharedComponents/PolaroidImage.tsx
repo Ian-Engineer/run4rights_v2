@@ -43,7 +43,7 @@ type PolaroidPhotoProps = {
 };
 
 function PolaroidPhoto({ src, caption }: PolaroidPhotoProps) {
-  const rotation = (Math.random() - 0.5) * 6; // -3° to +3°
+  const rotation = (Math.random() - 0.5) * 16; // -3° to +3°
 
   return (
     <Box

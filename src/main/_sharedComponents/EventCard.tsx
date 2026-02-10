@@ -59,6 +59,10 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
         return USDollar.format(amount);
     }
     
+    function parseLocalDate(dateStr: string) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Date(y, m - 1, d);
+    }
 
     const RenderText = ({event, size}: {event: Event, size: string}) => {
         return (
@@ -100,7 +104,7 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
 
     return (
         <div className="flex flex-row gap-6 items-center">
-            <RenderDate eventDate={new Date(event.eventDate)} dateSize={dimensions[size].dateSize as TypographyVariant} borderRadius={dimensions[size].borderRadius}/>
+            <RenderDate eventDate={parseLocalDate(event.eventDate)} dateSize={dimensions[size].dateSize as TypographyVariant} borderRadius={dimensions[size].borderRadius}/>
             <RenderText event={event} size={size}/>
         </div>
     )
