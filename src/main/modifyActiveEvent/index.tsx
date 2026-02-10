@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Breadcrumbs, Divider, Link, Typography } from '@mui/material'
 import { Link as RouterLink } from "react-router-dom";
-import { Event, ApiResponse } from 'models';
-import api from '../../api';
 
 function ModifyActiveEvent() {
-  const [ eventsList, setEventsList ] = useState<Event[]>([]);
-  const [ error, setError ] = useState<string | null>(null)
-  const [ loading, setLoading ] = useState<boolean>(true);
+  // const [ eventsList, setEventsList ] = useState<Event[]>([]);
+  // const [ error, setError ] = useState<string | null>(null)
+  // const [ loading, setLoading ] = useState<boolean>(true);
 
   useEffect(()=> {
 
