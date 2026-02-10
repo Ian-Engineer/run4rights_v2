@@ -50,6 +50,14 @@ const router = createBrowserRouter([
             {
               path: "/admin/modify-event/:id",
               Component: Routes.ModifyEvent,
+            },
+            {
+              path: "/admin/update-runners",
+              Component: Routes.UpdateRunners,
+            },
+            {
+              path: "/admin/update-active-event",
+              Component: Routes.ModifyActiveEvent,
             }
           ]
         },

@@ -1,3 +1,5 @@
+import { Runner } from "./runner";
+
 export interface Event {
     id: string;
     eventDate: Date;
@@ -14,6 +16,7 @@ export interface Event {
     startTime: string;
     endTime: string;
     timezone: string;
+    runners?: Runner[]
 }
 
 export interface EventsSorted {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Divider, Skeleton, Typography } from '@mui/material'
+import { Breadcrumbs, Divider, Link, Skeleton, Typography } from '@mui/material'
+import { Link as RouterLink } from "react-router-dom";
 import EventCard from 'main/_sharedComponents/EventCard';
 import { Event, ApiResponse } from 'models';
 import api from '../../api';
@@ -25,21 +26,42 @@ function ModifyEventSelection() {
   }, [])
 
   return (
-    <div className="flex flex-col w-full h-fit min-h-full p-4 align-center items-center">
-      <Typography variant='h4' color='primary'>Modify Events Page</Typography>
-      <Divider sx={{backgroundColor: "primary.main"}}  className='w-full'/>
-      <div className="flex flex-col gap-6">
-        {
-          eventsList.length ? eventsList.map((event) => 
-            <EventCard event={event} future={true} key={`eventCardFor:${event.organization}-on-${event.eventDate}`}/>
-          )
-            :
-          loading ? 
-            <Skeleton variant="rectangular"/>
-           : 
-            <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : "Currently, there are no upcoming events scheduled."}</Typography>
-          
-        }
+    <div className="w-full h-full p-4">
+      <Breadcrumbs>
+        <Link
+          component={RouterLink}
+          to="/admin/dashboard"
+          underline="hover"
+          color="inherit"
+        >
+          Admin
+        </Link>
+
+        <Link
+          component={RouterLink}
+          to="/admin/dashboard"
+          underline="hover"
+          color="inherit"
+        >
+          Dashboard
+        </Link>
+      </Breadcrumbs>
+      <div className="flex flex-col w-full align-center items-center">
+        <Typography color="primary" variant='h4' fontWeight={600} className='p-4'>Modify Events Page</Typography>
+        <Divider sx={{backgroundColor: "primary.main"}}  className='w-full'/>
+        <div className="flex flex-col gap-6">
+          {
+            eventsList.length ? eventsList.map((event) => 
+              <EventCard event={event} future={true} key={`eventCardFor:${event.organization}-on-${event.eventDate}`}/>
+            )
+              :
+            loading ? 
+              <Skeleton variant="rectangular"/>
+            : 
+              <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : "Currently, there are no upcoming events scheduled."}</Typography>
+            
+          }
+        </div>
       </div>
     </div>
   )

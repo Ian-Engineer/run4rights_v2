@@ -94,11 +94,30 @@ const lightThemeOptions: ThemeOptions = {
         MuiPaper: {
             styleOverrides: {
                 root: {
-                    backgroundColor: thirtyPercent,
+                    backgroundColor: sixtyPercent,
                     borderRadius: "5px"
                 }
             }
-        }
+        },
+        MuiDialog: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: pageBackground,
+                }
+            }
+        },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    '& .MuiSvgIcon-root': {
+                          color: thirtyPercent,
+                    },
+                    '&.Mui-checked .MuiSvgIcon-root': {
+                        color: thirtyPercent,
+                    }
+                },
+            },
+        },
     }
 }
 

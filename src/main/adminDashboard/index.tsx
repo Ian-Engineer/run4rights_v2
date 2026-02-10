@@ -9,18 +9,20 @@ function AdminDashboard() {
   return (
     <div className='flex justify-center items-center align-center'>
       <Box className="p-4 flex flex-col gap-4 w-full overflow-hidden justify-center items-center">
-        <Typography className="block sm:hidden" fontWeight={600} variant="h3" color="primary">
+        <Typography className="block" fontWeight={600} variant="h3" color="primary">
           Admin Dashboard
         </Typography>
         <Run4RightsButton
-          text="Create Event"
+          text="Active Event"
+          onClick={()=>navigate("/admin/update-active-event")}
         />
         <Run4RightsButton 
-          text="Modify Event"
+          text="Manage Events"
           onClick={()=>navigate("/admin/modify-event")}
         />
         <Run4RightsButton 
-          text="Create Runner"
+          text="Update Runners"
+          onClick={()=>navigate("/admin/update-runners")}
         />
       </Box>
     </div>

@@ -12,6 +12,8 @@ import AdminDashboard from "main/adminDashboard";
 import AdminRoute from "config/auth/AdminRoute";
 import ModifyEventSection from "main/modifyEventSelection";
 import ModifyEvent from "main/modifyEvent";
+import UpdateRunners from "main/updateRunners";
+import ModifyActiveEvent from "main/modifyActiveEvent";
 
 export default {
     Root,
@@ -28,4 +30,6 @@ export default {
     AdminRoute,
     ModifyEventSection,
     ModifyEvent,
+    UpdateRunners,
+    ModifyActiveEvent,
 }
