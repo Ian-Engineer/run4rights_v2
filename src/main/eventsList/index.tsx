@@ -58,7 +58,7 @@ function EventsPage() {
   return (
       <div className='flex flex-row w-full h-fit min-h-full'>
         <div className='flex flex-col gap-10 items-center text-center w-full mt-4 mb-4'>
-          <SectionRender title={"Active Events"}>
+          {/* <SectionRender title={"Active Events"}>
             <>
             {activeEvent ? 
               <EventCard event={activeEvent} future={true} key={`eventCardFor:${activeEvent.organization}-on-${activeEvent.eventDate}`}/>
@@ -66,7 +66,7 @@ function EventsPage() {
               <Typography color={error ? 'error' : 'primary'}>{error ? "Error getting event details. Try again soon." : "Currently, there are no active events."}</Typography>
             }
             </>
-          </SectionRender>
+          </SectionRender> */}
           <SectionRender title={"Upcoming Events"}>
             <div className="flex flex-col gap-6">
               {

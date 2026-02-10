@@ -43,6 +43,13 @@ function EventPage() {
     });
   }, [params]);
 
+  function formatUSD(amount: number): string {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount);
+  }
+
   return (
     <div className='flex w-full h-full pb-4'>
       {loading ? (
@@ -99,7 +106,20 @@ function EventPage() {
                       </a>
                     </div>
                   </div>
-                  <div className='flex flex-col gap-4 p-4'>
+                  { event.moneyRaised ? (
+                    <div className='flex flex-row gap-4 pl-4 pr-4 items-center'>
+                      <Typography variant='h5' fontWeight={700} color='primary'>Money Raised:</Typography>
+                      <Typography 
+                        variant='h6' 
+                        fontWeight={500} 
+                        color='primary'
+                        sx={{ whiteSpace: 'pre-line' }}
+                      >
+                        {formatUSD(event.moneyRaised)}
+                      </Typography>
+                    </div>
+                  ) : null}
+                  <div className='flex flex-col gap-4 pl-4 pr-4'>
                     <Typography variant='h5' fontWeight={700} color='primary'>About the Event</Typography>
                     <Typography 
                       variant='body1' 
@@ -110,7 +130,7 @@ function EventPage() {
                       {event.description}
                     </Typography>
                   </div>
-                  <div className='flex flex-col gap-4 p-4'>
+                  <div className='flex flex-col gap-4 pl-4 pr-4'>
                     <Typography variant='h5' fontWeight={700} color='primary'>The Runners</Typography>
                     <Box
                       sx={{
