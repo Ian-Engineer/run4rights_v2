@@ -15,6 +15,11 @@ function EventPage() {
 
   const params = useParams();
 
+  function parseLocalDate(dateStr: string) {
+    const [y, m, d] = dateStr.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
   // make a request to get this event details using query param
 
   useEffect(() => {
@@ -57,7 +62,7 @@ function EventPage() {
                 <div className='flex flex-col gap-4'>
                   <div className='flex flex-row gap-4'>
                     <div className="h-min-fit w-min-fit flex justify-center items-center">
-                      <RenderDate eventDate={new Date(event.eventDate)} dateSize="h4" borderRadius="10px" displayYear={true}/>
+                      <RenderDate eventDate={parseLocalDate(event.eventDate)} dateSize="h4" borderRadius="10px" displayYear={true}/>
                     </div>
                     <div className='flex flex-col w-fit gap-4'>
                       <div>

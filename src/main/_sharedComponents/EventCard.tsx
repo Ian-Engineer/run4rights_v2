@@ -60,8 +60,8 @@ const EventCard = ({event, size = 'medium', future = false}: {event: Event, size
     }
     
     function parseLocalDate(dateStr: string) {
-    const [y, m, d] = dateStr.split('-').map(Number);
-    return new Date(y, m - 1, d);
+        const [y, m, d] = dateStr.split('-').map(Number);
+        return new Date(y, m - 1, d);
     }
 
     const RenderText = ({event, size}: {event: Event, size: string}) => {
